@@ -1,0 +1,23 @@
+{# Chatbot messenger-style widget. Included in base.html. #}
+{% load static %}
+<div id="chatbot-container" aria-live="polite">
+  <div id="chatbot-header" role="button" tabindex="0" onclick="chatbotToggle()" onkeypress="if(event.key==='Enter') chatbotToggle()" aria-label="Open chat">
+    {% if site_settings and site_settings.logo %}
+      <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }}" style="height:20px; margin-right:8px;">
+    {% else %}
+      <img src="{% static 'core/images/logo.png' %}" alt="logo" style="height:20px; margin-right:8px;">
+    {% endif %}
+    <span>Chat with us</span>
+  </div>
+
+  <div id="chatbot-box" style="display:none;" aria-hidden="true">
+    <div id="chatbot-messages" role="log" aria-live="polite" aria-atomic="false"></div>
+    <div class="chat-input">
+      <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off" />
+      <button id="chatbot-send" onclick="chatbotSend()" aria-label="Send message">Send</button>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'chatbot/chatbot.css' %}">
+<script src="{% static 'chatbot/chatbot.js' %}"></script>

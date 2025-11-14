@@ -1,0 +1,171 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Home - {{ site_settings.site_name|default:"DeepMinds" }}{% endblock %}
+{% block meta_desc %}Turn unusable data into high-value AI outcomes with consulting, generative AI, and AI agents.{% endblock %}
+
+{% block content %}
+<header class="hero position-relative">
+  {% if site_settings and site_settings.hero_video %}
+    <video autoplay muted loop id="hero-video" playsinline>
+      <source src="{{ site_settings.hero_video.url }}" type="video/mp4">
+    </video>
+  {% else %}
+    <video autoplay muted loop id="hero-video" playsinline>
+      <!-- <source src="{% static 'core/images/hero-bg.mp4' %}" type="video/mp4"> -->
+      <source src="https://cdn.pixabay.com/video/2021/01/11/61695-499594106_tiny.mp4" type="video/mp4">
+    </video>
+  {% endif %}
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-inner text-center" data-aos="fade-up">
+    <h1 class="hero-title">
+      <span id="typed-text" class="gradient-text">Develop, Operate & Deploy AI You Can Trust at Scale</span>
+    </h1>
+
+    <p class="hero-subtext mt-3">Turn unusable data into high-value AI outcomes. With AI consulting, advanced technology, and automation, we design and operate trusted AI systems that drive measurable business results.</p>
+
+    <div class="mt-4">
+      <a href="{% url 'core:contact' %}" class="btn btn-gradient btn-lg me-3">Request a Demo</a>
+      <a href="{% url 'core:trainings' %}" class="btn btn-outline-light btn-lg">Join Training</a>
+    </div>
+
+    <div class="hero-stats d-flex justify-content-center gap-4 mt-4">
+      <div class="stat">
+        <div class="stat-num" data-target="{{ projects.count }}">0</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="{{ testimonials.count }}">0</div>
+        <div class="stat-label">Clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="{{ trainings.count }}">0</div>
+        <div class="stat-label">Trainings</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="platform" class="section">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="gradient-text">An AI Platform That Meets You Where You Are</h2>
+      <p class="lead text-muted">Data collection, training, inference, and operations — engineered for reliability and scale.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      {% for s in services %}
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:50 }}">
+        <div class="platform-card text-center p-4 h-100">
+          {% if s.icon_class %}<i class="{{ s.icon_class }} fa-3x"></i>{% else %}<i class="fas fa-cogs fa-3x"></i>{% endif %}
+          <h5 class="mt-3">{{ s.title }}</h5>
+          <p class="text-muted small">{{ s.short_description }}</p>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">No services configured yet.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="workflows" class="section bg-dark-alt">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="gradient-text">AI Workflows We Run For Clients</h2>
+      <p class="text-muted">Repeatable pipelines that turn ideas into production-ready features.</p>
+    </div>
+
+    <div class="workflow-timeline mt-5 position-relative" data-aos="fade-up">
+      <div class="workflow-step" data-step="1">
+        <div class="step-icon">
+          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
+        </div>
+        <h5>Data Collection</h5>
+        <p class="text-muted small">Ingest logs, APIs, and third-party sources; establish governance.</p>
+      </div>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <div class="workflow-step" data-step="2">
+        <div class="step-icon">
+          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kkflmtur.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
+        </div>
+        <h5>Preprocessing</h5>
+        <p class="text-muted small">Cleaning, augmentation, tokenization and schema harmonization.</p>
+      </div>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <div class="workflow-step" data-step="3">
+        <div class="step-icon">
+          <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_jNEOSb.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
+        </div>
+        <h5>Modeling</h5>
+        <p class="text-muted small">Train GANs, diffusion models and LLMs; tune and validate rigorously.</p>
+      </div>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <div class="workflow-step" data-step="4">
+        <div class="step-icon">
+          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_dd8hi5yh.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
+        </div>
+        <h5>Deployment</h5>
+        <p class="text-muted small">Canary/blue-green rollout, autoscaling, secure endpoints.</p>
+      </div>
+
+      <div class="connector" aria-hidden="true"></div>
+
+      <!-- <div class="workflow-step" data-step="5">
+        <div class="step-icon">
+          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
+        </div>
+        <h5>Monitoring & Ops</h5>
+        <p class="text-muted small">Drift detection, alerting and continuous retraining pipelines.</p>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="gradient-text">Featured Projects</h2>
+      <p class="text-muted">A sample of research prototypes and deployed solutions.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      {% for p in projects %}
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:80 }}">
+        <div class="card project-card h-100">
+          {% if p.thumbnail %}
+            <img src="{{ p.thumbnail.url }}" class="card-img-top" alt="{{ p.title }}">
+          {% else %}
+            <img src="{% static 'core/images/projects/placeholder.jpg' %}" class="card-img-top" alt="{{ p.title }}">
+          {% endif %}
+          <div class="card-body">
+            {% if p.category %}<span class="badge bg-cyan">{{ p.category }}</span>{% endif %}
+            <h5 class="card-title mt-2">{{ p.title }}</h5>
+            <p class="text-muted small">{{ p.short_description|truncatechars:110 }}</p>
+            <a class="btn btn-sm btn-gradient" href="{% url 'core:projects' %}">View Projects</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">No projects yet — add some via the admin panel.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section text-center">
+  <div class="container">
+    <div class="cta-card p-4 rounded" data-aos="zoom-in">
+      <h3 class="mb-2">Ready to build reliable AI?</h3>
+      <p class="text-muted">Book a consultation and let’s design an AI roadmap that delivers measurable outcomes.</p>
+      <a href="{% url 'core:contact' %}" class="btn btn-gradient btn-lg mt-2">Request a Demo</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

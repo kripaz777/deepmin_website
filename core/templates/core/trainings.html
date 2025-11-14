@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+{% block title %}Trainings - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-compact section pt-6 text-center">
+  <div class="container" data-aos="fade-up">
+    <h1 class="gradient-text">AI Trainings & Workshops</h1>
+    <p class="text-muted lead">Hands-on courses by industry experts — Deep Learning, GANs, LLM engineering and MLOps.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      {% for t in trainings %}
+      <div class="col-lg-4" data-aos="fade-up">
+        <div class="card p-4 mb-4 h-100">
+          <h5>{{ t.title }}</h5>
+          <p class="text-muted small">{{ t.summary|truncatechars:140 }}</p>
+          <div class="d-flex gap-3 mt-3 align-items-center">
+            <span class="badge bg-cyan">{{ t.mode }}</span>
+            <span class="badge bg-cyan">{{ t.duration }}</span>
+            <a href="{% url 'core:trainings' %}" class="btn btn-sm btn-gradient ms-auto">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">No trainings available yet.</p></div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-4 text-center">
+      <a href="{% url 'core:contact' %}" class="btn btn-outline-light">Request Custom Corporate Training</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

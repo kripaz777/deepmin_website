@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% block title %}About - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="section pt-6">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7" data-aos="fade-up">
+        <h2 class="gradient-text">Our Mission</h2>
+        <p class="text-muted">To democratize AI through innovation, education, and real-world implementation. We empower people and businesses through intelligent automation.</p>
+
+        <h4 class="mt-4">Vision & Values</h4>
+        <ul class="list-unstyled text-muted">
+          <li>• Innovation — pushing boundaries in generative AI and LLMs.</li>
+          <li>• Research & Ethics — responsible AI and strong validation.</li>
+          <li>• Scalability — production-grade MLOps and operations.</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="card p-3">
+          <h6>Our Team</h6>
+          {% for m in team %}
+          <div class="d-flex gap-3 align-items-center my-3">
+            {% if m.photo %}
+              <img src="{{ m.photo.url }}" alt="{{ m.name }}" class="team-photo">
+            {% else %}
+              <img src="{% static 'core/images/team/placeholder.jpg' %}" alt="{{ m.name }}" class="team-photo">
+            {% endif %}
+            <div>
+              <strong>{{ m.name }}</strong><br>
+              <small class="text-muted">{{ m.role }}</small>
+            </div>
+          </div>
+          {% empty %}
+          <p class="text-muted">Add team members via admin.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card p-3">
+          <h6>Company Timeline</h6>
+          <p class="small text-muted">Add achievements and timeline items in the admin (you can extend models to include timeline entries).</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card p-3">
+          <h6>Core Values</h6>
+          <p class="small text-muted">Innovation • Research • Ethics • Scalability • Impact</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card p-3">
+          <h6>Contact</h6>
+          <p class="small text-muted">For partnerships and research collaborations, <a href="{% url 'core:contact' %}">get in touch</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

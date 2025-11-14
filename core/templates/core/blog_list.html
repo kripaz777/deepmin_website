@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Blog - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="section pt-6">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h2 class="gradient-text">Latest from the Blog</h2>
+
+        <div class="mt-4">
+          {% for post in posts %}
+          <article class="card blog-card mb-4">
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if post.cover_image %}
+                  <img src="{{ post.cover_image.url }}" class="img-fluid" alt="{{ post.title }}">
+                {% else %}
+                  <img src="{% static 'core/images/blog/placeholder.jpg' %}" class="img-fluid" alt="{{ post.title }}">
+                {% endif %}
+              </div>
+              <div class="col-md-8 p-3">
+                <h5>{{ post.title }}</h5>
+                <p class="text-muted small">{{ post.created_at|date:"F j, Y" }} • {{ post.category }}</p>
+                <p class="text-muted">{{ post.excerpt|truncatechars:160 }}</p>
+                <a href="{% url 'core:blog_detail' slug=post.slug %}" class="btn btn-sm btn-gradient">Read More</a>
+              </div>
+            </div>
+          </article>
+          {% empty %}
+          <p class="text-muted">No blog posts yet — add posts from admin.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <aside class="col-lg-4" data-aos="fade-left">
+        <div class="card p-3 mb-4">
+          <h6>Categories</h6>
+          <ul class="list-unstyled">
+            {% with posts.values_list 'category' as cats %}
+              {% for cat in cats|default:list %}
+                {% if cat %}
+                  <li><a href="#">{{ cat }}</a></li>
+                {% endif %}
+              {% endfor %}
+            {% endwith %}
+          </ul>
+        </div>
+
+        <div class="card p-3">
+          <h6>Follow</h6>
+          <p class="text-muted small">Subscribe to our newsletter for updates on research, products and training.</p>
+          <form id="subscribeForm">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email address" required>
+              <button class="btn btn-gradient" type="submit">Follow</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

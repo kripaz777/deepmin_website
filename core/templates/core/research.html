@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% block title %}Research & Innovation - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="section pt-6">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="gradient-text">Research & Innovation</h2>
+      <p class="text-muted">Publications, prototypes, and experiments driving generative AI and reliable deployments.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      {% for item in items %}
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card research-card h-100">
+          <div class="card-body">
+            <h5>{{ item.title }}</h5>
+            <p class="text-muted small">{{ item.summary|truncatechars:140 }}</p>
+            {% if item.link %}
+              <a href="{{ item.link }}" target="_blank" class="btn btn-sm btn-gradient">Read More</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">Add research items through admin.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

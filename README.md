@@ -1,0 +1,1 @@
+# DeepMinds Django Project\nFollow README to setup the project.

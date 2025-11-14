@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block title %}Services - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-compact section pt-6">
+  <div class="container text-center" data-aos="fade-up">
+    <h1 class="gradient-text">Our AI Services</h1>
+    <p class="lead text-muted">End-to-end services from strategy to production: Generative AI, Agents, CV, NLP, and Automation.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      {% for s in services %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <div class="service-card p-4 h-100">
+          <div class="d-flex align-items-center gap-3">
+            <div class="icon-circle">
+              {% if s.icon_class %}
+                <i class="{{ s.icon_class }} fa-2x"></i>
+              {% else %}
+                <i class="fas fa-gear fa-2x"></i>
+              {% endif %}
+            </div>
+            <div>
+              <h5 class="mb-1">{{ s.title }}</h5>
+              <p class="text-muted small mb-0">{{ s.short_description }}</p>
+            </div>
+          </div>
+          <a class="stretched-link" href="#"></a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">Add services from admin.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

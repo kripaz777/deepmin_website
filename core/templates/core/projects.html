@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Projects - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<section class="section pt-6">
+  <div class="container">
+    <div class="section-header text-center" data-aos="fade-up">
+      <h2 class="gradient-text">Our Generative & Applied AI Projects</h2>
+      <p class="text-muted">Case studies and prototypes across GANs, LLMs, CV, and automation.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      {% for p in projects %}
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:80 }}">
+        <div class="card project-card h-100">
+          {% if p.thumbnail %}
+            <img src="{{ p.thumbnail.url }}" class="card-img-top" alt="{{ p.title }}">
+          {% else %}
+            <img src="{% static 'core/images/projects/placeholder.jpg' %}" class="card-img-top" alt="{{ p.title }}">
+          {% endif %}
+          <div class="card-body">
+            {% if p.category %}<span class="badge bg-cyan">{{ p.category }}</span>{% endif %}
+            <h5 class="card-title mt-2">{{ p.title }}</h5>
+            <p class="text-muted small">{{ p.short_description|truncatechars:120 }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center"><p class="text-muted">No projects yet.</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
