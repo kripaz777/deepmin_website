@@ -1,40 +1,184 @@
-{% extends "core/base.html" %}
+{% extends 'core/base.html' %}
+{% load static %}
+
 {% block title %}Services - {{ site_settings.site_name }}{% endblock %}
 
 {% block content %}
-<section class="hero-compact section pt-6">
-  <div class="container text-center" data-aos="fade-up">
-    <h1 class="gradient-text">Our AI Services</h1>
-    <p class="lead text-muted">End-to-end services from strategy to production: Generative AI, Agents, CV, NLP, and Automation.</p>
+<!-- Hero Section -->
+<section class="hero-compact">
+  <div class="page-header-glow"></div>
+  <div class="container position-relative z-2">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <span class="section-subtitle">Our Expertise</span>
+        <h1 class="display-3 fw-bold mb-4">AI <span class="text-gradient">Capabilities</span></h1>
+        <p class="lead mx-auto" style="max-width: 700px;">
+          From generative models to autonomous agents, we provide end-to-end AI engineering services
+          designed to accelerate your enterprise intelligence.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
+<!-- Services Grid -->
+<section class="section-padding py-5 services-container overflow-hidden">
+  <div class="container position-relative">
     <div class="row g-4">
-      {% for s in services %}
-      <div class="col-lg-4 col-md-6" data-aos="fade-up">
-        <div class="service-card p-4 h-100">
-          <div class="d-flex align-items-center gap-3">
-            <div class="icon-circle">
-              {% if s.icon_class %}
-                <i class="{{ s.icon_class }} fa-2x"></i>
-              {% else %}
-                <i class="fas fa-gear fa-2x"></i>
-              {% endif %}
+      {% for service in services %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="modern-service-card">
+          <div class="border-beam"></div>
+
+          <div class="service-icon-wrapper">
+            <i class="{{ service.icon_class|default:'fas fa-microchip' }}"></i>
+          </div>
+
+          <div class="service-content">
+            <div class="service-badge-row">
+              <span class="service-tag">Core Service</span>
+              <span class="service-tag">v4.0</span>
             </div>
-            <div>
-              <h5 class="mb-1">{{ s.title }}</h5>
-              <p class="text-muted small mb-0">{{ s.short_description }}</p>
+
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-desc">{{ service.short_description }}</p>
+
+            <ul class="card-feature-list">
+              <li><i class="fas fa-microchip"></i> Advanced Neural Networks</li>
+              <li><i class="fas fa-database"></i> Vector DB Integration</li>
+              <li><i class="fas fa-shield-alt"></i> Compliance-first Design</li>
+            </ul>
+
+            <div class="pt-3">
+              <a href="{% url 'core:contact' %}" class="btn btn-sm btn-glow w-100">Consult Now</a>
             </div>
           </div>
-          <a class="stretched-link" href="#"></a>
         </div>
       </div>
-      {% empty %}
-      <div class="col-12 text-center"><p class="text-muted">Add services from admin.</p></div>
       {% endfor %}
     </div>
   </div>
 </section>
+
+<!-- Development Methodology -->
+<section class="section-padding py-5 position-relative overflow-hidden build-methodology-section">
+  <div class="methodology-bg-glow"></div>
+  <div class="container position-relative z-2">
+    <div class="row align-items-center">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="mb-4">
+          <span class="section-subtitle">Our Methodology</span>
+          <h2 class="section-title">How We <span class="text-gradient">Build</span></h2>
+        </div>
+
+        <p class="text-muted lead mb-5">
+          We follow a rigorous, research-driven engineering process to ensure every AI solution is reliable,
+          scalable, and ethically aligned.
+        </p>
+
+        <div class="methodology-timeline">
+          <div class="methodology-item premium-step-card">
+            <div class="methodology-icon">
+              <span class="step-num">01</span>
+            </div>
+            <div class="methodology-content">
+              <h4>Discovery & Deep Research</h4>
+              <p>We analyze your technical landscape to identify high-impact AI opportunities and security constraints.
+              </p>
+            </div>
+          </div>
+
+          <div class="methodology-item premium-step-card">
+            <div class="methodology-icon">
+              <span class="step-num">02</span>
+            </div>
+            <div class="methodology-content">
+              <h4>Rapid Prototyping (PoC)</h4>
+              <p>Developing functional evidence using state-of-the-art LLMs and vector orchestration with rapid feedback
+                loops.</p>
+            </div>
+          </div>
+
+          <div class="methodology-item premium-step-card">
+            <div class="methodology-icon">
+              <span class="step-num">03</span>
+            </div>
+            <div class="methodology-content">
+              <h4>Scale & Agentic Ops</h4>
+              <p>Deploying robust, autonomous systems into production with real-time monitoring and adaptive
+                fine-tuning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 offset-lg-1" data-aos="fade-left">
+        <div class="position-relative">
+          <div class="floating-asset-wrapper mb-5">
+            <img src="{% static 'core/img/assets/ai-build.png' %}" alt="AI Building Process"
+              class="img-fluid floating-ai-image" style="border-radius: 40px; box-shadow: var(--shadow-premium);">
+          </div>
+          <div class="ide-frame">
+            <div class="ide-header">
+              <div class="ide-controls">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="ide-tab">deepminds_agent.py</div>
+            </div>
+            <div class="ide-body">
+              <div class="code-line"><span class="c-keyword">import</span> deepminds <span class="c-keyword">as</span>
+                dm
+              </div>
+              <div class="code-line"></div>
+              <div class="code-line"><span class="c-comment"># Initializing Autonomous Workflow</span></div>
+              <div class="code-line"><span class="c-var">agent</span> = dm.<span class="c-func">AIAgent</span>({</div>
+              <div class="code-line">&nbsp;&nbsp;<span class="c-key">mission</span>: <span
+                  class="c-string">"Enterprise_Scale"</span>,</div>
+              <div class="code-line">&nbsp;&nbsp;<span class="c-key">engine</span>: <span
+                  class="c-string">"GPT-4-Turbo"</span>,</div>
+              <div class="code-line">&nbsp;&nbsp;<span class="c-key">tools</span>: [<span class="c-string">"RAG"</span>,
+                <span class="c-string">"VectorDB"</span>]
+              </div>
+              <div class="code-line">})</div>
+              <div class="code-line"></div>
+              <div class="code-line"><span class="c-keyword">await</span> <span class="c-var">agent</span>.<span
+                  class="c-func">initialize()</span></div>
+              <div class="code-line"><span class="c-keyword">await</span> <span class="c-var">agent</span>.<span
+                  class="c-func">run_optimizer()</span></div>
+              <div class="code-line"></div>
+              <div class="code-line"><span class="c-func">print</span>(<span class="c-string">"Build Status: Production
+                  Ready"</span>)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Custom Solutions CTA -->
+<section class="py-5 mb-5">
+  <div class="container">
+    <div class="glass-card-accent p-5 rounded-5 text-center border-gradient" data-aos="zoom-in">
+      <h2 class="display-6 fw-bold mb-4">Need a Bespoke AI Architecture?</h2>
+      <p class="text-light mb-4 mx-auto" style="max-width: 600px;">
+        Our engineering team specializes in custom LLM fine-tuning, vector database integration, and agentic workflow
+        orchestration.
+      </p>
+      <a href="{% url 'core:contact' %}" class="btn btn-glow btn-lg px-5">Architect Your Solution</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Mouse tracking spotlight effect
+  document.querySelectorAll('.modern-service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+</script>
 {% endblock %}

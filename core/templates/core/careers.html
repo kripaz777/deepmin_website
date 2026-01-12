@@ -1,38 +1,128 @@
 {% extends "core/base.html" %}
+{% load static %}
+
 {% block title %}Careers - {{ site_settings.site_name }}{% endblock %}
 
 {% block content %}
-<section class="section pt-6">
-  <div class="container">
-    <div data-aos="fade-up">
-      <h2 class="gradient-text">Careers at {{ site_settings.site_name|default:'DeepMinds' }}</h2>
-      <p class="text-muted">We’re hiring talented engineers, researchers and product leads. Join us.</p>
+<!-- Hero Section -->
+<section class="hero-compact">
+  <div class="page-header-glow"></div>
+  <div class="container position-relative z-2">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <span class="section-subtitle">Join the Collective</span>
+        <h1 class="display-3 fw-bold mb-4">Human <i class="fas fa-plus mx-1 small text-primary"></i> <span
+            class="text-gradient">AI</span></h1>
+        <p class="lead mx-auto" style="max-width: 700px;">
+          We’re architecting the autonomous future. Join a team of pioneering researchers and engineers
+          dedicated to building high-impact intelligence.
+        </p>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="row g-4 mt-4">
-      <div class="col-md-7" data-aos="fade-up">
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Job Listings -->
+      <div class="col-lg-7" data-aos="fade-right">
+        <div class="d-flex align-items-center justify-content-between mb-5">
+          <h3 class="h4 mb-0 fw-bold">Active Opportunities</h3>
+          <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 rounded-pill small">
+            {{ jobs.count|default:"0" }} Open Positions
+          </span>
+        </div>
+
         {% for job in jobs %}
-        <div class="card p-3 mb-3">
-          <h5>{{ job.title }}</h5>
-          <p class="text-muted small">{{ job.location }} • {{ job.posted_at|date:"F j, Y" }}</p>
-          <div class="text-muted small">{{ job.description|truncatechars:300 }}</div>
-          <a class="btn btn-sm btn-gradient mt-2" href="#apply">Apply</a>
+        <div class="glass-card-accent p-5 mb-4 border-gradient">
+
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+              <h4 class="h5 mb-2">{{ job.title }}</h4>
+              <div class="d-flex align-items-center gap-3">
+                {% if job.location %}
+                <span class="text-primary small fw-bold">
+                  <i class="fas fa-map-marker-alt me-2"></i>{{ job.location }}
+                </span>
+                {% endif %}
+                <span class="text-muted small">
+                  <i class="far fa-calendar-alt me-2"></i>{{ job.posted_at|date:'M j, Y' }}
+                </span>
+              </div>
+            </div>
+            <a href="{% url 'core:job_detail' job.pk %}" class="btn btn-sm btn-glow px-4 rounded-pill">View Role</a>
+          </div>
+          <p class="text-light small mb-0">{{ job.description|safe|truncatewords:30 }}</p>
+
         </div>
         {% empty %}
-        <div class="card p-3"><p class="text-muted">No active job openings at the moment.</p></div>
+        <div class="glass-card p-5 text-center border-gradient">
+          <div class="icon-box-lg mx-auto mb-4 opacity-80">
+
+            <i class="fas fa-search"></i>
+          </div>
+          <p class="text-muted lead">All neural nodes are currently occupied. Check back soon for new openings.</p>
+        </div>
         {% endfor %}
       </div>
 
-      <div class="col-md-5" id="apply" data-aos="fade-up" data-aos-delay="80">
-        {% if applied %}
-        <div class="alert alert-success">Thanks — your application has been submitted.</div>
-        {% endif %}
-        <div class="card p-4">
-          <h6>Upload Your CV</h6>
-          <form method="post" enctype="multipart/form-data">
+      <!-- Application Form -->
+      <div class="col-lg-5" id="apply" data-aos="fade-left">
+        <div class="glass-card p-5 rounded-5 border-gradient position-sticky" style="top: 120px;">
+          <h3 class="h4 mb-4 fw-bold">Transmit Intel</h3>
+
+          {% if applied %}
+          <div class="alert alert-success border-0 bg-success-subtle text-success mb-4 rounded-4">
+            <i class="fas fa-check-circle me-2"></i> Application received. Processing queue active.
+          </div>
+          {% endif %}
+
+          <form method="post" enctype="multipart/form-data" class="needs-validation">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-gradient">Upload & Apply</button>
+            <div class="row g-4">
+              <div class="col-12">
+                <div class="form-floating">
+                  <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" class="form-control"
+                    placeholder="Name" required>
+                  <label for="{{ form.name.id_for_label }}">Full Name</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+                    class="form-control" placeholder="Email" required>
+                  <label for="{{ form.email.id_for_label }}">Email Address</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <select name="{{ form.job.name }}" id="{{ form.job.id_for_label }}" class="form-select">
+                    <option value="" class="text-dark">General Application</option>
+                    {% for job in jobs %}
+                    <option value="{{ job.id }}" class="text-dark">{{ job.title }}</option>
+                    {% endfor %}
+                  </select>
+                  <label for="{{ form.job.id_for_label }}">Target Position</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <textarea name="{{ form.cover_message.name }}" id="{{ form.cover_message.id_for_label }}"
+                    class="form-control" placeholder="Message" style="height: 120px"></textarea>
+                  <label for="{{ form.cover_message.id_for_label }}">Neural Pitch (Bio/Cover)</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label small mb-2">Technical Dossier (CV/Resume)</label>
+                <input type="file" name="{{ form.cv.name }}" id="{{ form.cv.id_for_label }}" class="form-control"
+                  required>
+              </div>
+              <div class="col-12 pt-2">
+                <button type="submit" class="btn btn-glow w-100 py-3">Submit Application <i
+                    class="fas fa-chevron-right ms-2 small"></i></button>
+              </div>
+            </div>
           </form>
         </div>
       </div>

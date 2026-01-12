@@ -1,35 +1,41 @@
 {% extends "core/base.html" %}
-{% load static %}
 {% block title %}Products - {{ site_settings.site_name }}{% endblock %}
-
+{% load static %}
 {% block content %}
-<section class="section pt-6">
-  <div class="container">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2 class="gradient-text">Products</h2>
-      <p class="text-muted">Platform components and products that power trustworthy AI.</p>
-    </div>
+<section class="hero-compact text-center">
+  <div class="container position-relative z-2">
+    <h1 class="display-3 fw-bold mb-4">Autonomous <span class="text-gradient">Products</span></h1>
+    <p class="lead mb-0">Platform components that power the next generation of trustworthy AI.</p>
+  </div>
+</section>
 
-    <div class="row g-4 mt-4">
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
       {% for product in products %}
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="card product-card h-100">
-          {% if product.thumbnail %}
-            <img src="{{ product.thumbnail.url }}" class="card-img-top" alt="{{ product.name }}">
-          {% else %}
-            <img src="{% static 'core/images/projects/placeholder.jpg' %}" class="card-img-top" alt="{{ product.name }}">
-          {% endif %}
-          <div class="card-body">
-            <h5>{{ product.name }}</h5>
-            <p class="text-muted small">{{ product.description|truncatechars:120 }}</p>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="glass-card p-0 overflow-hidden h-100 d-flex flex-column text-center">
+          <div class="product-image-wrapper w-100" style="height: 250px; background: #0d021f;">
+            {% if product.thumbnail %}
+            <img src="{{ product.thumbnail.url }}" class="w-100 h-100 object-fit-cover" alt="{{ product.name }}">
+            {% else %}
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-primary"
+              style="opacity: 0.3;">
+              <i class="fas fa-box fa-3x"></i>
+            </div>
+            {% endif %}
+          </div>
+          <div class="p-4 flex-grow-1 d-flex flex-column align-items-center">
+            <h3 class="h4 fw-bold mb-3">{{ product.name }}</h3>
+            <p class="text-muted mb-4 flex-grow-1">{{ product.description }}</p>
             {% if product.link %}
-              <a href="{{ product.link }}" target="_blank" class="btn btn-sm btn-gradient">Explore</a>
+            <div class="mt-auto">
+              <a href="{{ product.link }}" class="btn btn-glow rounded-pill px-5">Explore Solution</a>
+            </div>
             {% endif %}
           </div>
         </div>
       </div>
-      {% empty %}
-      <div class="col-12 text-center"><p class="text-muted">Add products in admin.</p></div>
       {% endfor %}
     </div>
   </div>

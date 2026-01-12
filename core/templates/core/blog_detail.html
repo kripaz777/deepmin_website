@@ -3,26 +3,70 @@
 {% block meta_desc %}{{ post.excerpt|default:post.title }}{% endblock %}
 {% block og_title %}{{ post.title }}{% endblock %}
 {% block og_desc %}{{ post.excerpt|default:post.title }}{% endblock %}
-{% block og_image %}{% if post.cover_image %}{{ post.cover_image.url }}{% else %}{% static 'core/images/blog/placeholder.jpg' %}{% endif %}{% endblock %}
+{% load static %}
+
 
 {% block content %}
-<section class="section pt-6">
+<section class="section-padding pt-5">
   <div class="container">
-    <article data-aos="fade-up">
-      <h1 class="gradient-text">{{ post.title }}</h1>
-      <p class="text-muted small">{{ post.created_at|date:"F j, Y" }} • {{ post.category }}</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <article data-aos="fade-up" class="blog-detail-content">
+          <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'core:blog' %}"
+                  class="text-primary text-decoration-none">Intelligence Feed</a></li>
+              <li class="breadcrumb-item active text-muted" aria-current="page">{{ post.category|default:"Research" }}
+              </li>
+            </ol>
+          </nav>
 
-      {% if post.cover_image %}
-      <img src="{{ post.cover_image.url }}" class="img-fluid rounded my-4" alt="{{ post.title }}">
-      {% endif %}
+          <header class="mb-5">
+            <h1 class="display-3 fw-bold text-gradient mb-4">{{ post.title }}</h1>
+            <div class="d-flex align-items-center gap-3">
+              <div class="post-meta-v2">
+                <span class="text-light fs-5">
+                  <i class="far fa-calendar-alt me-2 text-primary"></i>
+                  {{ post.created_at|date:"F j, Y" }}
+                </span>
+                <span class="mx-3 text-secondary opacity-50">|</span>
+                <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 rounded-pill fs-6">
+                  {{ post.category|default:"Intelligence" }}
+                </span>
+              </div>
+            </div>
+          </header>
 
-      <div class="content">
-        {{ post.content|safe }}
+          {% if post.cover_image %}
+          <div
+            class="featured-image-wrapper mb-5 rounded-4 overflow-hidden border border-secondary border-opacity-25 shadow-lg">
+            <img src="{{ post.cover_image.url }}" class="img-fluid w-100" alt="{{ post.title }}"
+              style="max-height: 500px; object-fit: cover;">
+          </div>
+          {% endif %}
+
+          <div class="blog-rich-content fs-4 text-light-emphasis lh-base">
+            {{ post.content|safe }}
+          </div>
+
+          <div class="post-footer mt-5 pt-5 border-top border-secondary border-opacity-25 pb-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+              <div class="share-box">
+                <span class="text-muted d-block mb-2 small text-uppercase letter-spacing-1">Share Intelligence</span>
+                <div class="d-flex gap-2">
+                  <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                  <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                </div>
+              </div>
+              <a href="{% url 'core:blog' %}" class="btn btn-lg btn-glow px-5 rounded-pill">
+                <i class="fas fa-arrow-left me-2"></i> Return to Feed
+              </a>
+            </div>
+          </div>
+        </article>
       </div>
-
-      <hr>
-      <a href="{% url 'core:blog' %}" class="btn btn-outline-light">Back to Blog</a>
-    </article>
+    </div>
   </div>
 </section>
 {% endblock %}

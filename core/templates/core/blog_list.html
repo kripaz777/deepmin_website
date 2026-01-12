@@ -1,64 +1,144 @@
 {% extends "core/base.html" %}
-{% load static %}
 {% block title %}Blog - {{ site_settings.site_name }}{% endblock %}
+{% load static %}
 
 {% block content %}
-<section class="section pt-6">
-  <div class="container">
-    <div class="row">
+<!-- Hero Section -->
+<section class="hero-compact">
+  <div class="page-header-glow"></div>
+  <div class="container position-relative z-2">
+    <div class="row justify-content-center text-center">
       <div class="col-lg-8" data-aos="fade-up">
-        <h2 class="gradient-text">Latest from the Blog</h2>
+        <span class="section-subtitle">DeepMinds Insights</span>
+        <h1 class="display-3 fw-bold mb-4">The <span class="text-gradient">Intelligence</span> Feed</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+          Deep dives into autonomous systems, neural architectures, and the future of human-AI collaboration.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="mt-4">
-          {% for post in posts %}
-          <article class="card blog-card mb-4">
-            <div class="row g-0">
-              <div class="col-md-4">
-                {% if post.cover_image %}
-                  <img src="{{ post.cover_image.url }}" class="img-fluid" alt="{{ post.title }}">
-                {% else %}
-                  <img src="{% static 'core/images/blog/placeholder.jpg' %}" class="img-fluid" alt="{{ post.title }}">
-                {% endif %}
+<!-- Blog Content -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Main Content -->
+      <div class="col-lg-8" data-aos="fade-right">
+        {% if query %}
+        <div class="mb-4">
+          <h4 class="text-white">Search results for: <span class="text-primary">"{{ query }}"</span></h4>
+          <a href="{% url 'core:blog' %}" class="btn btn-sm btn-link text-muted p-0">Clear Search</a>
+        </div>
+        {% endif %}
+
+        {% for post in posts %}
+        <article class="glass-card p-0 overflow-hidden mb-5 border-0 blog-card-horizontal">
+          <div class="row g-0">
+            <div class="col-md-5 team-image-wrapper">
+              {% if post.cover_image %}
+              <img src="{{ post.cover_image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ post.title }}">
+              {% else %}
+              <div class="bg-dark w-100 h-100 d-flex align-items-center justify-content-center"
+                style="min-height: 250px;">
+                <i class="fas fa-microchip fa-4x text-primary opacity-60"></i>
               </div>
-              <div class="col-md-8 p-3">
-                <h5>{{ post.title }}</h5>
-                <p class="text-muted small">{{ post.created_at|date:"F j, Y" }} • {{ post.category }}</p>
-                <p class="text-muted">{{ post.excerpt|truncatechars:160 }}</p>
-                <a href="{% url 'core:blog_detail' slug=post.slug %}" class="btn btn-sm btn-gradient">Read More</a>
+              {% endif %}
+            </div>
+            <div class="col-md-7 p-4 p-md-5 d-flex flex-column justify-content-center">
+              <div class="mb-3 d-flex align-items-center gap-3">
+                <span class="badge bg-primary-subtle text-primary border border-primary rounded-pill px-3">
+                  {{ post.category|default:"Intelligence" }}
+                </span>
+                <span class="text-muted small">
+                  <i class="far fa-calendar-alt me-2"></i>
+                  {{ post.created_at|date:"M j, Y" }}
+                </span>
+              </div>
+              <h3 class="h2 mb-3">
+                <a href="{% url 'core:blog_detail' slug=post.slug %}"
+                  class="text-white text-decoration-none hover-text-primary lh-sm">{{ post.title }}</a>
+              </h3>
+              <p class="text-light fs-5 mb-4 flex-grow-1 opacity-75">{{ post.excerpt|truncatechars:160 }}</p>
+              <div>
+                <a href="{% url 'core:blog_detail' slug=post.slug %}"
+                  class="btn btn-md btn-outline-light rounded-pill px-4">Read Technical Specs</a>
               </div>
             </div>
-          </article>
-          {% empty %}
-          <p class="text-muted">No blog posts yet — add posts from admin.</p>
-          {% endfor %}
+          </div>
+        </article>
+        {% empty %}
+        <div class="glass-card p-5 text-center border-gradient">
+          <p class="text-muted lead">No transmissions received yet. The agents are busy compiling data.</p>
+          {% if query %}
+          <a href="{% url 'core:blog' %}" class="btn btn-glow mt-3">Reset Uplink</a>
+          {% endif %}
         </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <nav class="mt-5 d-flex justify-content-center">
+          <ul class="pagination pagination-md glass-pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link"
+                href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}"
+                aria-label="Previous">
+                <i class="fas fa-chevron-left"></i>
+              </a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item"><a
+                class="page-link" href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}">{{ num }}</a></li>
+              {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}"
+                  aria-label="Next">
+                  <i class="fas fa-chevron-right"></i>
+                </a>
+              </li>
+              {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
       </div>
 
-      <aside class="col-lg-4" data-aos="fade-left">
-        <div class="card p-3 mb-4">
-          <h6>Categories</h6>
-          <ul class="list-unstyled">
-            {% with posts.values_list 'category' as cats %}
-              {% for cat in cats|default:list %}
-                {% if cat %}
-                  <li><a href="#">{{ cat }}</a></li>
-                {% endif %}
-              {% endfor %}
-            {% endwith %}
-          </ul>
-        </div>
-
-        <div class="card p-3">
-          <h6>Follow</h6>
-          <p class="text-muted small">Subscribe to our newsletter for updates on research, products and training.</p>
-          <form id="subscribeForm">
+      <!-- Sidebar -->
+      <div class="col-lg-4" data-aos="fade-left">
+        <!-- Search Widget -->
+        <div class="glass-card p-4 mb-4 border-gradient">
+          <h5 class="mb-3 fw-bold fs-4">Search Archives</h5>
+          <form action="{% url 'core:blog' %}" method="get">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="Email address" required>
-              <button class="btn btn-gradient" type="submit">Follow</button>
+              <input type="text" name="q" value="{{ query|default:'' }}"
+                class="form-control bg-transparent text-white border-secondary" placeholder="Keywords or Intel ID...">
+              <button class="btn btn-glow" type="submit"><i class="fas fa-search"></i></button>
             </div>
           </form>
         </div>
-      </aside>
+
+        <!-- Newsletter Widget -->
+        <div id="newsletter-widget" class="glass-card p-4 border-gradient">
+          <h5 class="mb-3 fw-bold fs-4">Neural Bulletin</h5>
+          <p class="text-muted mb-4 opacity-75">Get curated AI research and updates delivered to your terminal.</p>
+          <form hx-post="{% url 'core:newsletter_subscribe' %}" hx-target="#newsletter-widget" hx-swap="innerHTML">
+            {% csrf_token %}
+            <div class="mb-3">
+              <input type="email" name="email" required class="form-control bg-transparent text-white border-secondary"
+                placeholder="email@nexus.com">
+            </div>
+            <button class="btn btn-glow w-100" type="submit">Initialize Sync</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </section>

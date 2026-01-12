@@ -1,0 +1,926 @@
+/* 
+========================================
+   Theme: AI Research Inspired (Violet/Pink)
+   "Vibrant, Modern, High-End Intelligence"
+========================================
+*/
+
+:root {
+    /* Restored Signature AI Lab Palette (Violet/Pink) */
+    --ct-primary: #7c3aed;
+    /* Deep Vibrant Violet */
+    --ct-primary-light: #ec4899;
+    /* Saturated Pink */
+    --ct-accent: #d946ef;
+    /* Magenta Accent */
+    --ct-info: #0ea5e9;
+    --ct-success: #10b981;
+    --ct-warning: #f59e0b;
+    --ct-dark: #2e1065;
+    /* Deep Indigo-Violet */
+    --ct-darker: #1e1b4b;
+    --ct-light: #fdfcff;
+    --ct-white: #ffffff;
+    --ct-muted: #6d28d9;
+    --ct-gray-100: #f8f6ff;
+    /* Ultra-clean Lavender */
+    --ct-gray-200: #f0ebff;
+
+    /* Refined Radius & Layered Crystalline Shadows */
+    --ct-shadow: 0 4px 6px -1px rgb(124 58 237 / 0.08), 0 2px 4px -2px rgb(124 58 237 / 0.04);
+    --ct-shadow-lg: 0 20px 25px -5px rgb(124 58 237 / 0.1), 0 8px 10px -6px rgb(124 58 237 / 0.05);
+    --ct-shadow-premium: 0 0 0 1px rgba(124, 58, 237, 0.05), 0 10px 30px -5px rgba(124, 58, 237, 0.1), 0 20px 50px -10px rgba(124, 58, 237, 0.1);
+
+    --ct-transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --ct-radius-xl: 24px;
+}
+
+/* Global Reset & Typography */
+body.theme-clean {
+    background-color: var(--ct-gray-100) !important;
+    background-image:
+        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.05) 0px, transparent 50%) !important;
+    color: var(--ct-dark) !important;
+    font-family: 'Outfit', sans-serif !important;
+    line-height: 1.6;
+    font-size: 1rem;
+    /* Scaled down for Zoom Out */
+}
+
+body.theme-clean *::selection {
+    background: var(--ct-primary);
+    color: white;
+}
+
+body.theme-clean::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.theme-clean::-webkit-scrollbar-track {
+    background: var(--ct-gray-100);
+}
+
+body.theme-clean::-webkit-scrollbar-thumb {
+    background: var(--ct-muted);
+    border-radius: 5px;
+    border: 3px solid var(--ct-gray-100);
+}
+
+body.theme-clean #canvas-container,
+body.theme-clean .bg-gradient-orb,
+body.theme-clean .bg-grid-overlay,
+body.theme-clean .page-header-glow,
+body.theme-clean .border-beam {
+    display: none !important;
+}
+
+body.theme-clean .bg-darker,
+body.theme-clean .bg-dark {
+    background: var(--ct-gray-100) !important;
+}
+
+/* Navbar Premium Styling */
+body.theme-clean .glass-nav {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.04) !important;
+    padding: 1.2rem 0 !important;
+}
+
+body.theme-clean .navbar-brand .brand-name {
+    color: var(--ct-dark) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.05em;
+    font-size: 1.6rem !important;
+}
+
+body.theme-clean .nav-link {
+    color: var(--ct-dark) !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    padding: 0.8rem 1.1rem !important;
+    transition: var(--ct-transition);
+}
+
+body.theme-clean .nav-link:hover,
+body.theme-clean .nav-link.active {
+    color: var(--ct-primary) !important;
+    transform: translateY(-2px);
+}
+
+body.theme-clean .glass-nav.scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    padding: 0.8rem 0 !important;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.08) !important;
+}
+
+/* Navbar Contact Button Spec */
+body.theme-clean .navbar-nav .nav-item .btn-glow.nav-link {
+    background: var(--ct-primary) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    padding: 0.5rem 1.3rem !important;
+    margin-left: 0.4rem;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2) !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.theme-clean .navbar-nav .nav-item .btn-glow.nav-link:hover {
+    background: var(--ct-dark) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3) !important;
+}
+
+body.theme-clean .navbar-toggler {
+    border-color: var(--ct-gray-200) !important;
+    padding: 0.5rem !important;
+}
+
+body.theme-clean .navbar-toggler-icon {
+    filter: invert(1) grayscale(100%) brightness(0.2) sepia(100%) hue-rotate(240deg) saturate(200%);
+}
+
+/* Hero Section High-Contrast */
+body.theme-clean .hero-section,
+body.theme-clean .hero-compact,
+body.theme-clean .hero-standard {
+    background: linear-gradient(135deg, var(--ct-primary) 0%, var(--ct-primary-light) 100%) !important;
+    padding: 180px 0 120px !important;
+    position: relative;
+    overflow: hidden;
+    border-bottom: none !important;
+}
+
+body.theme-clean .hero-standard {
+    padding: 140px 0 80px !important;
+}
+
+body.theme-clean .hero-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+body.theme-clean .hero-section h1,
+body.theme-clean .hero-compact h1,
+body.theme-clean .hero-standard h1 {
+    font-size: 3.8rem !important;
+    /* Scaled down for Zoom Out */
+    font-weight: 800 !important;
+    letter-spacing: -0.05em !important;
+    line-height: 1.1 !important;
+    color: white !important;
+}
+
+body.theme-clean .hero-section .lead,
+body.theme-clean .hero-compact .lead,
+body.theme-clean .hero-standard .lead {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.15rem !important;
+    /* Scaled down for Zoom Out */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.theme-clean .hero-section *,
+body.theme-clean .hero-compact * {
+    color: white !important;
+}
+
+/* Premium Card System */
+body.theme-clean .glass-card,
+body.theme-clean .modern-service-card,
+body.theme-clean .course-card,
+body.theme-clean .project-card,
+body.theme-clean .industry-bento-card,
+body.theme-clean .glass-card-accent {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(15, 23, 42, 0.05) !important;
+    box-shadow: var(--ct-shadow-premium) !important;
+    border-radius: var(--ct-radius-xl) !important;
+    transition: var(--ct-transition) !important;
+}
+
+body.theme-clean .glass-card:hover,
+body.theme-clean .modern-service-card:hover,
+body.theme-clean .course-card:hover,
+body.theme-clean .glass-card-accent:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    background: #ffffff !important;
+    border-color: var(--ct-primary) !important;
+    box-shadow: 0 30px 60px -12px rgba(15, 23, 42, 0.15) !important;
+}
+
+/* Icon & Title Overrides */
+body.theme-clean .service-icon-wrapper {
+    width: 100px !important;
+    height: 100px !important;
+    background: var(--ct-gray-200) !important;
+    color: var(--ct-primary) !important;
+    font-size: 3rem !important;
+    margin-bottom: 2.5rem !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.theme-clean .service-title {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 1.7rem !important;
+    /* Scaled down for Zoom Out */
+    font-weight: 800 !important;
+    color: var(--ct-dark) !important;
+    margin-bottom: 1.2rem !important;
+    letter-spacing: -0.03em !important;
+    text-align: center !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+body.theme-clean .service-desc,
+body.theme-clean .card-feature-list li,
+body.theme-clean .value-card p,
+body.theme-clean .industry-card-desc {
+    color: var(--ct-dark) !important;
+    font-weight: 600 !important;
+    font-size: 1.05rem !important;
+    opacity: 1 !important;
+}
+
+body.theme-clean .value-icon-wrapper {
+    background: var(--ct-gray-200) !important;
+    color: var(--ct-primary) !important;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 1.5rem !important;
+}
+
+/* Buttons */
+body.theme-clean .btn-glow,
+body.theme-clean .btn-primary {
+    background: var(--ct-primary) !important;
+    color: white !important;
+    border-radius: 14px !important;
+    padding: 1rem 2.8rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3) !important;
+    border: none !important;
+}
+
+body.theme-clean .btn-glow:hover {
+    background: var(--ct-dark) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 20px 35px -8px rgba(15, 23, 42, 0.2) !important;
+}
+
+body.theme-clean .btn-outline-light {
+    border: 1px solid var(--ct-gray-200) !important;
+    color: var(--ct-dark) !important;
+    background: white !important;
+    border-radius: 14px !important;
+}
+
+/* Industry Tabs Premium (Clean Mode) */
+body.theme-clean .industry-nav-pills {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    padding: 1rem !important;
+    border-radius: 20px !important;
+    box-shadow: var(--ct-shadow) !important;
+}
+
+body.theme-clean .industry-tab-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--ct-muted) !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: var(--ct-transition) !important;
+    border-left: 3px solid transparent !important;
+}
+
+body.theme-clean .industry-tab-btn.active {
+    background: var(--ct-light) !important;
+    color: var(--ct-primary) !important;
+    border-left: 3px solid var(--ct-primary) !important;
+    transform: translateX(5px) !important;
+}
+
+body.theme-clean .industry-display-card,
+body.theme-clean .border-gradient {
+    background: white !important;
+    border: 1px solid rgba(15, 23, 42, 0.05) !important;
+    box-shadow: var(--ct-shadow-premium) !important;
+}
+
+body.theme-clean .border-gradient:hover {
+    border-color: var(--ct-primary) !important;
+}
+
+/* Form Controls (Clean Mode) */
+body.theme-clean .form-control {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    color: var(--ct-dark) !important;
+    border-radius: 12px !important;
+}
+
+body.theme-clean .form-control:focus {
+    border-color: var(--ct-primary) !important;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1) !important;
+}
+
+/* Breadcrumbs Premium */
+body.theme-clean .breadcrumb {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    box-shadow: var(--ct-shadow) !important;
+    padding: 0.8rem 2rem !important;
+    border-radius: 50px !important;
+}
+
+body.theme-clean .breadcrumb-item a {
+    color: var(--ct-primary) !important;
+    font-weight: 700 !important;
+}
+
+body.theme-clean .breadcrumb-item.active {
+    color: var(--ct-dark) !important;
+    font-weight: 900 !important;
+}
+
+/* Force Global Legibility */
+body.theme-clean p,
+body.theme-clean li,
+body.theme-clean span:not(.badge),
+body.theme-clean .section-title,
+body.theme-clean h1,
+body.theme-clean h2,
+body.theme-clean h3,
+body.theme-clean h4,
+body.theme-clean h5,
+body.theme-clean h6,
+body.theme-clean .text-white,
+body.theme-clean .text-light,
+body.theme-clean .lead,
+body.theme-clean .job-description,
+body.theme-clean .job-description * {
+    color: var(--ct-dark) !important;
+}
+
+/* Footer Clean */
+body.theme-clean .glass-footer {
+    background: white !important;
+    border-top: 1px solid var(--ct-gray-200) !important;
+    padding: 100px 0 40px !important;
+}
+
+body.theme-clean .footer-heading {
+    color: var(--ct-primary) !important;
+    background: linear-gradient(135deg, var(--ct-dark) 0%, var(--ct-primary) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    font-size: 1.1rem !important;
+    margin-bottom: 2rem !important;
+    letter-spacing: 4px !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* --- Footer Contrast Improvements (Clean Mode) --- */
+body.theme-clean .footer-links a {
+    color: var(--ct-muted) !important;
+    font-weight: 600 !important;
+    transition: var(--ct-transition);
+}
+
+body.theme-clean .footer-links a:hover {
+    color: var(--ct-primary) !important;
+    padding-left: 8px !important;
+}
+
+body.theme-clean .footer-contact li,
+body.theme-clean .footer-bottom p,
+body.theme-clean .footer-bottom a {
+    color: var(--ct-dark) !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+}
+
+body.theme-clean .footer-bottom a:hover {
+    color: var(--ct-primary) !important;
+}
+
+body.theme-clean .social-link {
+    background: white !important;
+    color: var(--ct-primary) !important;
+    box-shadow: var(--ct-shadow) !important;
+    border: 1px solid var(--ct-gray-200) !important;
+}
+
+body.theme-clean .social-link:hover {
+    background: var(--ct-primary) !important;
+    color: white !important;
+}
+
+/* --- Clean Mode Final Polish --- */
+body.theme-clean .text-gradient {
+    background: linear-gradient(135deg, var(--ct-primary) 0%, var(--ct-primary-light) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+body.theme-clean .scroll-progress {
+    background: var(--ct-primary) !important;
+}
+
+body.theme-clean .section-subtitle {
+    color: var(--ct-primary) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+}
+
+/* --- Clean Mode Training Card Polish --- */
+
+body.theme-clean .course-title {
+    color: var(--ct-dark) !important;
+    font-weight: 800 !important;
+}
+
+body.theme-clean .course-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ct-light) !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    border-radius: 12px;
+    padding: 0.8rem;
+    gap: 1.2rem;
+}
+
+body.theme-clean .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ct-muted) !important;
+}
+
+body.theme-clean .meta-item i {
+    color: var(--ct-primary) !important;
+    font-size: 1rem;
+}
+
+body.theme-clean .meta-divider {
+    width: 1px;
+    height: 15px;
+    background: var(--ct-gray-200) !important;
+}
+
+body.theme-clean .btn-syllabus {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    color: var(--ct-dark) !important;
+    border-radius: 50px !important;
+    padding: 0.7rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02) !important;
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+body.theme-clean .btn-syllabus:hover {
+    background: var(--ct-primary) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2) !important;
+}
+
+body.theme-clean .course-price-wrapper .h3,
+body.theme-clean .course-price-wrapper .h4 {
+    color: var(--ct-primary) !important;
+    font-weight: 900 !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+body.theme-clean .course-card {
+    padding: 0 !important;
+    overflow: hidden !important;
+    align-items: stretch !important;
+    text-align: left !important;
+}
+
+body.theme-clean .course-card .course-image {
+    height: 220px !important;
+    overflow: hidden;
+    position: relative;
+}
+
+body.theme-clean .course-card .course-image img {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body.theme-clean .course-card:hover .course-image img {
+    transform: scale(1.1) !important;
+}
+
+/* --- Clean Mode Methodology & IDE Frame --- */
+
+body.theme-clean .methodology-icon {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    box-shadow: var(--ct-shadow) !important;
+}
+
+body.theme-clean .methodology-timeline::before {
+    background: var(--ct-primary) !important;
+    opacity: 0.1 !important;
+}
+
+body.theme-clean .ide-frame {
+    background: white !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    box-shadow: var(--ct-shadow-lg) !important;
+}
+
+body.theme-clean .ide-header {
+    background: var(--ct-light) !important;
+    border-bottom: 1px solid var(--ct-gray-200) !important;
+}
+
+body.theme-clean .ide-tab {
+    color: var(--ct-dark) !important;
+    font-weight: 600 !important;
+}
+
+body.theme-clean .ide-body {
+    background: white !important;
+}
+
+body.theme-clean .code-line {
+    color: var(--ct-dark) !important;
+}
+
+/* IDE Syntax Light */
+body.theme-clean .c-keyword {
+    color: #d73a49;
+}
+
+body.theme-clean .c-func {
+    color: #6f42c1;
+}
+
+body.theme-clean .c-var {
+    color: #24292e;
+}
+
+body.theme-clean .c-string {
+    color: #032f62;
+}
+
+body.theme-clean .c-key {
+    color: #e36209;
+}
+
+body.theme-clean .c-comment {
+    color: #6a737d;
+}
+
+
+/* --- Clean Mode Methodology Premium Polish --- */
+
+body.theme-clean .build-methodology-section {
+    background: radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.02) 0%, transparent 40%) !important;
+}
+
+body.theme-clean .premium-step-card {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(124, 58, 237, 0.05) !important;
+    border-radius: 20px !important;
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem !important;
+    margin-bottom: 2rem !important;
+    transition: var(--ct-transition) !important;
+}
+
+body.theme-clean .premium-step-card:hover {
+    background: white !important;
+    box-shadow: var(--ct-shadow-lg) !important;
+    border-color: var(--ct-primary) !important;
+}
+
+body.theme-clean .methodology-icon {
+    left: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: var(--ct-gray-100) !important;
+}
+
+body.theme-clean .premium-step-card:hover .methodology-icon {
+    background: var(--ct-primary) !important;
+    color: white !important;
+    transform: translateY(-50%) scale(1.1) !important;
+}
+
+body.theme-clean .premium-step-card:hover .step-num {
+    color: white !important;
+}
+
+body.theme-clean .floating-ai-image {
+    background: white !important;
+    padding: 15px !important;
+    border: 1px solid var(--ct-gray-100) !important;
+}
+
+body.theme-clean .ide-frame {
+    box-shadow: var(--ct-shadow-premium) !important;
+}
+
+/* --- Clean Mode Responsive Navbar --- */
+
+@media (max-width: 991px) {
+    body.theme-clean .glass-nav {
+        background: white !important;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    body.theme-clean .navbar-collapse {
+        background: white !important;
+        border: 1px solid var(--ct-gray-200) !important;
+        box-shadow: var(--ct-shadow-lg) !important;
+        margin-top: 10px;
+        border-radius: 15px;
+    }
+
+    body.theme-clean .nav-link {
+        color: var(--ct-dark) !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid var(--ct-gray-100);
+    }
+
+    body.theme-clean .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    body.theme-clean .navbar-nav .nav-item .btn-glow.nav-link {
+        margin-left: 0 !important;
+        margin-top: 15px !important;
+        width: 100% !important;
+        padding: 12px !important;
+    }
+}
+
+
+@media (max-width: 991px) {
+    body.theme-clean .navbar-brand .brand-name {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* --- Careers Detail Polish (Clean Mode) --- */
+body.theme-clean .job-description {
+    color: var(--ct-dark) !important;
+    opacity: 1 !important;
+}
+
+body.theme-clean .job-description p {
+    margin-bottom: 1.5rem;
+}
+
+body.theme-clean .job-description strong {
+    color: var(--ct-primary);
+    font-weight: 700;
+}
+
+body.theme-clean .text-primary {
+    color: var(--ct-primary) !important;
+}
+
+body.theme-clean .text-primary-subtle {
+    color: var(--ct-muted) !important;
+}
+
+/* --- Button Overrides (Clean Mode) --- */
+body.theme-clean .btn-glow {
+    background: linear-gradient(135deg, var(--ct-primary) 0%, #ec4899 100%) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25) !important;
+}
+
+body.theme-clean .btn-glow:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4) !important;
+    filter: brightness(1.1);
+}
+
+
+/* --- Hero Element Contrast Fixes (Clean Mode) --- */
+
+body.theme-clean .hero-section .badge {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+}
+
+body.theme-clean .btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: white !important;
+    backdrop-filter: blur(10px);
+    transition: var(--ct-transition) !important;
+}
+
+body.theme-clean .btn-outline-light:hover {
+    background: white !important;
+    color: var(--ct-primary) !important;
+    border-color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure sub-text in floating cards is visible in Hero */
+body.theme-clean .floating-stat-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+}
+
+body.theme-clean .floating-stat-card .text-white {
+    color: var(--ct-dark) !important;
+}
+
+body.theme-clean .floating-stat-card .text-muted {
+    color: var(--ct-muted) !important;
+}
+
+
+/* --- Clean Mode Hero Enhancements --- */
+
+body.theme-clean .hero-particles .particle {
+    opacity: 0.1 !important;
+}
+
+body.theme-clean .hero-image-aura {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%) !important;
+}
+
+body.theme-clean .mouse-icon {
+    border-color: var(--ct-muted) !important;
+}
+
+body.theme-clean .scroll-guide span {
+    color: var(--ct-muted) !important;
+}
+
+body.theme-clean .hero-main-image {
+    background: white !important;
+    padding: 10px !important;
+    border: 1px solid var(--ct-gray-200) !important;
+    box-shadow: var(--ct-shadow-lg) !important;
+}
+
+/* Typography Reveal Cleanup for Clean Mode */
+body.theme-clean .hero-content-reveal h1 {
+    color: var(--ct-dark) !important;
+}
+
+body.theme-clean .hero-content-reveal p {
+    color: var(--ct-muted) !important;
+}
+
+
+/* --- Clean Mode Technical Hero Updates --- */
+
+body.theme-clean .hero-scanner {
+    background: linear-gradient(to bottom, transparent, var(--ct-primary), transparent) !important;
+    box-shadow: 0 0 10px var(--ct-primary) !important;
+}
+
+body.theme-clean .filter-grayscale {
+    filter: grayscale(100%) brightness(0.2) !important;
+    opacity: 0.2 !important;
+}
+
+body.theme-clean .hero-trust-bar span {
+    color: var(--ct-muted) !important;
+}
+
+
+/* --- Clean Mode Vector Illustration Polish --- */
+
+body.theme-clean .hero-vector-img {
+    filter: drop-shadow(0 15px 40px rgba(124, 58, 237, 0.15)) !important;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 40px;
+}
+
+body.theme-clean .hero-main-illustration-container {
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 75%) !important;
+}
+
+
+/* --- Clean Mode SVG Polish --- */
+
+body.theme-clean .agentic-ecosystem-svg {
+    filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.1)) !important;
+}
+
+body.theme-clean .agent-node rect {
+    fill: white !important;
+    stroke: var(--ct-primary) !important;
+    stroke-opacity: 0.3 !important;
+}
+
+body.theme-clean .ui-panel {
+    fill: white !important;
+    stroke: var(--ct-gray-200) !important;
+}
+
+body.theme-clean .agentic-ecosystem-svg text {
+    fill: var(--ct-dark) !important;
+}
+
+
+/* --- Hero Agent Visual Polish --- */
+body.theme-clean .hero-main-visual-wrapper {
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+body.theme-clean .hero-main-image {
+    background: transparent !important;
+    filter: none !important;
+    border-radius: 0 !important;
+}
+
+/* --- Clean Theme Premium Button Overrides --- */
+body.theme-clean .btn-glass-premium {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+body.theme-clean .btn-glass-premium:hover {
+    background: white !important;
+    color: var(--ct-primary) !important;
+    border-color: white !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-clean .hero-section .btn-glow {
+    background: white !important;
+    color: var(--ct-primary) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.theme-clean .hero-section .btn-glow:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+body.theme-clean .btn-glass-premium:active,
+body.theme-clean .hero-section .btn-glow:active {
+    transform: translateY(1px) scale(0.98) !important;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1) !important;
+}

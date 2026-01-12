@@ -1,0 +1,158 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ training.title }} Syllabus - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-standard">
+    <div class="page-header-glow"></div>
+    <div class="container position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:trainings' %}"
+                                class="text-primary-subtle">Academy</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Syllabus</li>
+                    </ol>
+                </nav>
+                <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">{{ training.category }}</span>
+                <h1 class="display-4 fw-bold mb-4">{{ training.title }}</h1>
+                <p class="lead text-light opacity-75 mb-0">Complete roadmap and curriculum for mastering this domain.
+                </p>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
+                <div class="glass-card p-4 border-gradient shadow-premium">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="icon-box-md bg-primary text-dark rounded-circle me-3"><i
+                                class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <h5 class="text-white mb-0">Enrollment Open</h5>
+                            <small class="text-muted">Limited slots available</small>
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="text-muted small">Duration</div>
+                            <div class="text-white fw-bold"><i class="fas fa-clock text-primary me-2"></i>{{
+                                training.duration }}</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-muted small">Level</div>
+                            <div class="text-white fw-bold"><i class="fas fa-layer-group text-primary me-2"></i>{{
+                                training.level }}</div>
+                        </div>
+                    </div>
+                    <div
+                        class="price-box p-3 bg-dark bg-opacity-50 rounded-4 border border-white border-opacity-10 mb-4">
+                        {% if training.discount_price %}
+                        <div class="small text-muted mb-1 text-decoration-line-through">${{ training.price }}</div>
+                        <div class="h2 fw-bold mb-0 text-white">${{ training.discount_price }} <span
+                                class="badge bg-success-subtle text-success fs-6 fw-normal ms-2">Save{% with
+                                price=training.price disc=training.discount_price %}{% endwith %} Money</span></div>
+                        {% else %}
+                        <div class="h2 fw-bold mb-0 text-white">${{ training.price }}</div>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'core:contact' %}?subject=Course Enrollment: {{ training.title }}"
+                        class="btn btn-glow w-100 py-3 rounded-pill fw-bold text-uppercase letter-spacing-1">Claim Your
+                        Seat Now</a>
+                    <div class="text-center mt-3">
+                        <small class="text-muted"><i class="fas fa-shield-alt me-1"></i> Secure Payment & Certification
+                            Included</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Syllabus Content -->
+<section class="section-padding py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="glass-card mb-4 border-opacity-10">
+                    <h3 class="fw-bold mb-4 text-white">Course <span class="text-gradient">Curriculum</span></h3>
+                    <div class="blog-rich-content text-light syllabus-content">
+                        {% if training.content %}
+                        {{ training.content|safe }}
+                        {% else %}
+                        <p class="text-muted italic">The detailed transmission data for this syllabus is currently being
+                            decoded by our instructors. Check back shortly.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- FAQ/Requirements -->
+                <div class="glass-card border-opacity-10">
+                    <h4 class="fw-bold mb-4 text-white">Prerequisites</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-3"></i>
+                            Basic understanding of logic and computation</li>
+                        <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-3"></i>
+                            Dedicated high-performance compute environment</li>
+                        <li class="mb-2 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-3"></i>
+                            Passion for building autonomous systems</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="sticky-top" style="top: 120px;">
+                    <div class="glass-card border-opacity-10 text-center">
+                        <h4 class="fw-bold mb-4 text-white">Instructor</h4>
+                        <div class="mb-3">
+                            <i class="fas fa-user-circle fa-4x text-primary opacity-50"></i>
+                        </div>
+                        <h5 class="text-white">{{ training.instructor_name|default:"DeepMinds Core Researcher" }}</h5>
+                        <p class="small text-muted mb-0">Domain Expert</p>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-muted small">Need a custom training package for your team?</p>
+                        <a href="{% url 'core:contact' %}?subject=Custom Training Inquiry"
+                            class="btn btn-outline-primary rounded-pill px-4">Inquire Specs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .syllabus-content h1,
+    .syllabus-content h2,
+    .syllabus-content h3 {
+        color: var(--primary);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .syllabus-content p {
+        opacity: 0.85;
+        line-height: 1.8;
+    }
+
+    .syllabus-content ul {
+        margin-bottom: 2rem;
+    }
+
+    .syllabus-content li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .syllabus-content li::before {
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+    }
+</style>
+{% endblock %}

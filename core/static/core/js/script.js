@@ -1,101 +1,103 @@
-// core/static/core/js/script.js
-document.addEventListener('DOMContentLoaded', function () {
-  // AOS init
-  if(window.AOS) AOS.init({ duration: 900, once: true });
+// Initialize AOS
+// AOS.init is already called in base.html, but we can keep custom logic here if needed.
 
-  // Typed loop for hero
-  const phrases = [
-    "Develop, Operate & Deploy AI You Can Trust at Scale",
-    "Turn Data into High-Value AI Outcomes",
-    "Build Reliable AI Workflows for Production",
-    "Train Teams, Ship Models, Operate at Scale"
-  ];
-  let pIndex=0, lIndex=0, deleting=false;
-  const typedEl = document.getElementById('typed-text');
-  if(typedEl){
-    const tick = () => {
-      const current = phrases[pIndex % phrases.length];
-      if(!deleting){
-        typedEl.textContent = current.substring(0, ++lIndex);
-        if(lIndex === current.length){ deleting = true; setTimeout(tick, 1400); return; }
-      } else {
-        typedEl.textContent = current.substring(0, --lIndex);
-        if(lIndex === 0){ deleting = false; pIndex++; setTimeout(tick, 400); return; }
-      }
-      setTimeout(tick, deleting ? 40 : 90);
-    };
-    tick();
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  // GSAP ScrollTrigger Registration
+  gsap.registerPlugin(ScrollTrigger);
 
-  // Counters
-  const counters = document.querySelectorAll('.stat-num');
-  const counterObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const el = entry.target;
-        const target = parseInt(el.dataset.target || el.getAttribute('data-target') || el.textContent) || 0;
-        let start = 0;
-        const step = Math.max(1, Math.floor(target / 60));
-        const run = () => {
-          start += step;
-          if(start >= target) { el.textContent = target; }
-          else { el.textContent = start; requestAnimationFrame(run); }
-        };
-        run();
-        obs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.6 });
-  counters.forEach(c => counterObserver.observe(c));
+  // Hero Section Animation
+  gsap.from(".hero-section h1", {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    ease: "power3.out",
+    delay: 0.5
+  });
 
-  // Workflow reveal
-  const workflowSteps = document.querySelectorAll('.workflow-step');
-  if(workflowSteps.length){
-    const stepObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('reveal');
-          obs.unobserve(entry.target);
-        }
+  gsap.from(".hero-section p", {
+    duration: 1,
+    y: 30,
+    opacity: 0,
+    ease: "power3.out",
+    delay: 0.8
+  });
+
+  gsap.from(".hero-section .btn", {
+    duration: 1,
+    y: 20,
+    opacity: 0,
+    ease: "power3.out",
+    delay: 1,
+    stagger: 0.2
+  });
+
+  /* 
+  // Staggered Entry for Cards - Commented out to prevent conflict with AOS
+  const sections = document.querySelectorAll('.section-padding');
+
+  sections.forEach(section => {
+    const cards = section.querySelectorAll('.glass-card, .project-card');
+
+    if (cards.length > 0) {
+      gsap.from(cards, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
       });
-    }, { threshold: 0.2 });
-    workflowSteps.forEach(s => stepObserver.observe(s));
-  }
-
-  // Back to top
-  const back = document.getElementById('backToTop');
-  if(back){
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 400) back.style.display = 'flex';
-      else back.style.display = 'none';
-    });
-    back.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-
-  // Throttle Lottie on small devices
-  try {
-    const players = document.querySelectorAll('lottie-player');
-    const small = /Mobi|Android/i.test(navigator.userAgent) && window.innerWidth < 600;
-    if(small){
-      players.forEach(p => { try { p.pause(); } catch(e){} });
-      const workflowSection = document.getElementById('workflows');
-      if(workflowSection){
-        const resumeObserver = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting){
-              players.forEach(p => { try { p.play(); } catch(e){} });
-              obs.disconnect();
-            }
-          });
-        }, { threshold: 0.25 });
-        resumeObserver.observe(workflowSection);
-      }
     }
-  } catch (e) { console.warn('Lottie throttle error', e); }
+  });
+  */
 
-  // Demo subscribe form
-  const sub = document.getElementById('subscribeForm');
-  if(sub){
-    sub.addEventListener('submit', e => { e.preventDefault(); alert('Thanks — subscription recorded (demo).'); sub.reset(); });
+
+  // Navbar Glass Effect on Scroll
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Agent Terminal Typing Effect
+  const terminalContent = document.getElementById('terminal-content');
+  if (terminalContent) {
+    const commands = [
+      { text: "> initializing_agent_core...", delay: 500 },
+      { text: "> loading_modules: [NLP, Vision, Predictive]", delay: 1500 },
+      { text: "> connecting_to_neural_net...", delay: 2500 },
+      { text: "> status: ONLINE", delay: 3500, class: "text-primary" },
+      { text: "> awaiting_input...", delay: 4500 }
+    ];
+
+    let currentCommandIndex = 0;
+
+    function typeCommand(command) {
+      const line = document.createElement('div');
+      line.className = `mb-2 ${command.class || ''}`;
+      terminalContent.appendChild(line);
+
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        line.textContent += command.text.charAt(i);
+        i++;
+        if (i >= command.text.length) {
+          clearInterval(typeInterval);
+          currentCommandIndex++;
+          if (currentCommandIndex < commands.length) {
+            setTimeout(() => typeCommand(commands[currentCommandIndex]), 500);
+          }
+        }
+      }, 30); // Typing speed
+    }
+
+    setTimeout(() => typeCommand(commands[0]), 1000);
   }
 });

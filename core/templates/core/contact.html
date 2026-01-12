@@ -1,31 +1,109 @@
-{% extends "core/base.html" %}
-{% block title %}Contact - {{ site_settings.site_name }}{% endblock %}
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - {{ site_settings.site_name }}{% endblock %}
 
 {% block content %}
-<section class="section pt-6">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-md-6" data-aos="fade-up">
-        <h2 class="gradient-text">Let's build the future of AI together</h2>
-        <p class="text-muted">Tell us about your project and we’ll respond within 2 business days.</p>
-
-        <div class="card p-4 mt-4">
-          <h6>Contact Info</h6>
-          <p class="text-muted small"><i class="fas fa-envelope me-2"></i> info@deepminds.xyz</p>
-          <p class="text-muted small"><i class="fas fa-phone me-2"></i> +977 980xxxxxxx</p>
-        </div>
+<!-- Hero Section -->
+<section class="hero-compact">
+  <div class="page-header-glow"></div>
+  <div class="container position-relative z-2">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <span class="section-subtitle">Connect</span>
+        <h1 class="display-3 fw-bold mb-4">Initiate <span class="text-gradient">Contact</span></h1>
+        <p class="lead text-muted mx-auto" style="max-width: 700px;">
+          Ready to build the future? Reach out to our engineering team for collaborations, consultations, or inquiries.
+        </p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="col-md-6" data-aos="fade-up" data-aos-delay="80">
-        <div class="card p-4">
-          {% if sent %}
-            <div class="alert alert-success">Thanks — your message has been received.</div>
-          {% endif %}
-          <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-gradient">Send Message</button>
-          </form>
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="glass-card p-0 overflow-hidden border-gradient rounded-5" data-aos="fade-up">
+          <div class="row g-0">
+            <!-- Contact Info Sidebar -->
+            <div class="col-lg-4 bg-darker p-5 d-flex flex-column justify-content-between">
+              <div>
+                <h4 class="mb-4">Information</h4>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="icon-box text-primary me-3 fs-5"><i class="fas fa-envelope"></i></div>
+                  <div>
+                    <div class="small text-muted">Email Us</div>
+                    <div class="fw-bold">{{ site_settings.email|default:"hello@deepminds.academy" }}</div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="icon-box text-primary me-3 fs-5"><i class="fas fa-phone"></i></div>
+                  <div>
+                    <div class="small text-muted">Call Us</div>
+                    <div class="fw-bold">{{ site_settings.phone|default:"+977 98xxxxxxx" }}</div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="icon-box text-primary me-3 fs-5"><i class="fas fa-map-marker-alt"></i></div>
+                  <div>
+                    <div class="small text-muted">Visit Us</div>
+                    <div class="fw-bold">Kathmandu, Nepal</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="social-links mt-5">
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8 p-5">
+              {% if sent %}
+              <div class="alert alert-success border-0 bg-success-subtle text-success mb-5 rounded-4">
+                <i class="fas fa-check-circle me-2"></i> Signal received. Our agents will respond shortly.
+              </div>
+              {% endif %}
+
+              <form method="post" class="needs-validation">
+                {% csrf_token %}
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="text" name="name" class="form-control" id="id_name" placeholder="Name" required>
+                      <label for="id_name">Full Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="email" name="email" class="form-control" id="id_email" placeholder="Email" required>
+                      <label for="id_email">Email Address</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <input type="text" name="subject" class="form-control" id="id_subject" placeholder="Subject">
+                      <label for="id_subject">Inquiry Subject</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <textarea name="message" class="form-control" id="id_message" placeholder="Message"
+                        style="height: 180px" required></textarea>
+                      <label for="id_message">Your Transmission</label>
+                    </div>
+                  </div>
+                  <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-glow btn-lg px-5 py-3">Send Signal <i
+                        class="fas fa-paper-plane ms-2"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

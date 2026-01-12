@@ -1,171 +1,427 @@
-{% extends "core/base.html" %}
+{% extends 'core/base.html' %}
 {% load static %}
-{% block title %}Home - {{ site_settings.site_name|default:"DeepMinds" }}{% endblock %}
-{% block meta_desc %}Turn unusable data into high-value AI outcomes with consulting, generative AI, and AI agents.{% endblock %}
 
 {% block content %}
-<header class="hero position-relative">
-  {% if site_settings and site_settings.hero_video %}
-    <video autoplay muted loop id="hero-video" playsinline>
-      <source src="{{ site_settings.hero_video.url }}" type="video/mp4">
-    </video>
-  {% else %}
-    <video autoplay muted loop id="hero-video" playsinline>
-      <!-- <source src="{% static 'core/images/hero-bg.mp4' %}" type="video/mp4"> -->
-      <source src="https://cdn.pixabay.com/video/2021/01/11/61695-499594106_tiny.mp4" type="video/mp4">
-    </video>
-  {% endif %}
-  <div class="hero-overlay"></div>
 
-  <div class="container hero-inner text-center" data-aos="fade-up">
-    <h1 class="hero-title">
-      <span id="typed-text" class="gradient-text">Develop, Operate & Deploy AI You Can Trust at Scale</span>
-    </h1>
-
-    <p class="hero-subtext mt-3">Turn unusable data into high-value AI outcomes. With AI consulting, advanced technology, and automation, we design and operate trusted AI systems that drive measurable business results.</p>
-
-    <div class="mt-4">
-      <a href="{% url 'core:contact' %}" class="btn btn-gradient btn-lg me-3">Request a Demo</a>
-      <a href="{% url 'core:trainings' %}" class="btn btn-outline-light btn-lg">Join Training</a>
-    </div>
-
-    <div class="hero-stats d-flex justify-content-center gap-4 mt-4">
-      <div class="stat">
-        <div class="stat-num" data-target="{{ projects.count }}">0</div>
-        <div class="stat-label">Projects</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-target="{{ testimonials.count }}">0</div>
-        <div class="stat-label">Clients</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-target="{{ trainings.count }}">0</div>
-        <div class="stat-label">Trainings</div>
-      </div>
-    </div>
+<!-- Hero Section -->
+<section class="hero-section d-flex align-items-center position-relative overflow-hidden">
+  <!-- Subtle particle background for hero -->
+  <div class="hero-particles">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
   </div>
-</header>
 
-<section id="platform" class="section">
-  <div class="container">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2 class="gradient-text">An AI Platform That Meets You Where You Are</h2>
-      <p class="lead text-muted">Data collection, training, inference, and operations — engineered for reliability and scale.</p>
-    </div>
+  <div class="container position-relative z-2">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-up">
+        <div class="hero-content-reveal">
+          <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary mb-3 px-3 py-2">
+            <i class="fas fa-microchip me-2"></i> Leading the Agentic Revolution
+          </span>
+          <h1 class="display-3 fw-bolder mb-4 lh-tight tracking-tight">
+            {% if site_settings.hero_title %}
+            {{ site_settings.hero_title|safe }}
+            {% else %}
+            Next-Gen <span class='text-gradient'>AI Agents</span> & Autonomous Systems
+            {% endif %}
+          </h1>
+          <p class="lead mb-5 text-light opacity-75 fs-5" style="max-width: 600px;">
+            {% if site_settings.hero_subtitle %}
+            {{ site_settings.hero_subtitle }}
+            {% else %}
+            We architect intelligent ecosystems that think, learn, and execute. From agentic workflows to enterprise
+            LLMs,
+            we build the future of autonomy with unrivaled precision.
+            {% endif %}
+          </p>
+          <div class="d-flex gap-3 btn-group-hero mb-5">
+            <a href="{% url 'core:trainings' %}" class="btn btn-glow btn-lg px-5 py-3 rounded-pill fw-bold">
+              Explore Academy <i class="fas fa-rocket ms-2"></i>
+            </a>
+            <a href="{% url 'core:contact' %}"
+              class="btn btn-glass-premium btn-lg px-5 py-3 rounded-pill fw-bold hover-lift">
+              Consultation <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+          </div>
 
-    <div class="row g-4 mt-4">
-      {% for s in services %}
-      <div class="col-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:50 }}">
-        <div class="platform-card text-center p-4 h-100">
-          {% if s.icon_class %}<i class="{{ s.icon_class }} fa-3x"></i>{% else %}<i class="fas fa-cogs fa-3x"></i>{% endif %}
-          <h5 class="mt-3">{{ s.title }}</h5>
-          <p class="text-muted small">{{ s.short_description }}</p>
-        </div>
-      </div>
-      {% empty %}
-      <div class="col-12 text-center"><p class="text-muted">No services configured yet.</p></div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<section id="workflows" class="section bg-dark-alt">
-  <div class="container">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2 class="gradient-text">AI Workflows We Run For Clients</h2>
-      <p class="text-muted">Repeatable pipelines that turn ideas into production-ready features.</p>
-    </div>
-
-    <div class="workflow-timeline mt-5 position-relative" data-aos="fade-up">
-      <div class="workflow-step" data-step="1">
-        <div class="step-icon">
-          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
-        </div>
-        <h5>Data Collection</h5>
-        <p class="text-muted small">Ingest logs, APIs, and third-party sources; establish governance.</p>
-      </div>
-
-      <div class="connector" aria-hidden="true"></div>
-
-      <div class="workflow-step" data-step="2">
-        <div class="step-icon">
-          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kkflmtur.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
-        </div>
-        <h5>Preprocessing</h5>
-        <p class="text-muted small">Cleaning, augmentation, tokenization and schema harmonization.</p>
-      </div>
-
-      <div class="connector" aria-hidden="true"></div>
-
-      <div class="workflow-step" data-step="3">
-        <div class="step-icon">
-          <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_jNEOSb.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
-        </div>
-        <h5>Modeling</h5>
-        <p class="text-muted small">Train GANs, diffusion models and LLMs; tune and validate rigorously.</p>
-      </div>
-
-      <div class="connector" aria-hidden="true"></div>
-
-      <div class="workflow-step" data-step="4">
-        <div class="step-icon">
-          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_dd8hi5yh.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
-        </div>
-        <h5>Deployment</h5>
-        <p class="text-muted small">Canary/blue-green rollout, autoscaling, secure endpoints.</p>
-      </div>
-
-      <div class="connector" aria-hidden="true"></div>
-
-      <!-- <div class="workflow-step" data-step="5">
-        <div class="step-icon">
-          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" loop autoplay style="width:130px; height:130px;"></lottie-player>
-        </div>
-        <h5>Monitoring & Ops</h5>
-        <p class="text-muted small">Drift detection, alerting and continuous retraining pipelines.</p>
-      </div> -->
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header text-center" data-aos="fade-up">
-      <h2 class="gradient-text">Featured Projects</h2>
-      <p class="text-muted">A sample of research prototypes and deployed solutions.</p>
-    </div>
-
-    <div class="row g-4 mt-4">
-      {% for p in projects %}
-      <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:80 }}">
-        <div class="card project-card h-100">
-          {% if p.thumbnail %}
-            <img src="{{ p.thumbnail.url }}" class="card-img-top" alt="{{ p.title }}">
-          {% else %}
-            <img src="{% static 'core/images/projects/placeholder.jpg' %}" class="card-img-top" alt="{{ p.title }}">
-          {% endif %}
-          <div class="card-body">
-            {% if p.category %}<span class="badge bg-cyan">{{ p.category }}</span>{% endif %}
-            <h5 class="card-title mt-2">{{ p.title }}</h5>
-            <p class="text-muted small">{{ p.short_description|truncatechars:110 }}</p>
-            <a class="btn btn-sm btn-gradient" href="{% url 'core:projects' %}">View Projects</a>
+          <!-- Trust Indicators -->
+          <div class="hero-trust-bar" data-aos="fade-up" data-aos-delay="800">
+            <span class="small text-muted text-uppercase fw-bold tracking-widest mb-3 d-block">Trusted Engineering
+              Partner</span>
+            <div class="d-flex gap-4 opacity-50 filter-grayscale client-logos">
+              <i class="fab fa-google fa-lg"></i>
+              <i class="fab fa-aws fa-lg"></i>
+              <i class="fab fa-microsoft fa-lg"></i>
+              <i class="fab fa-nvidia fa-lg"></i>
+            </div>
           </div>
         </div>
       </div>
-      {% empty %}
-      <div class="col-12 text-center"><p class="text-muted">No projects yet — add some via the admin panel.</p></div>
+      <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
+        <div class="position-relative hero-visual-container">
+          <!-- Premium Visual Stack -->
+          <div class="hero-image-stack position-relative">
+            <!-- Cinematic Glow Aura -->
+            <div class="hero-image-aura"></div>
+
+              <!-- Technical Scanning Beam -->
+
+              <img src="{% static 'core/img/assets/hero-vector-removebg-preview.png' %}"
+                alt="AI Development Platform" 
+                style=" width: 100%; object-fit: contain;">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Scroll Guide -->
+  <div class="scroll-guide d-none d-lg-flex" data-aos="fade-up" data-aos-delay="1000">
+    <div class="mouse-icon"></div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="section-padding py-5 services-container overflow-hidden">
+  <div class="container position-relative">
+    <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
+      <div class="col-lg-8">
+        <span class="section-subtitle">
+          {% if site_settings.what_we_do_subtitle %}
+          {{ site_settings.what_we_do_subtitle }}
+          {% else %}
+          What We Do
+          {% endif %}
+        </span>
+        <h2 class="section-title">
+          {% if site_settings.what_we_do_title %}
+          {{ site_settings.what_we_do_title|safe }}
+          {% else %}
+          Comprehensive AI <span class='text-gradient'>Solutions</span>
+          {% endif %}
+        </h2>
+        <p class="text-muted">
+          {% if site_settings.what_we_do_desc %}
+          {{ site_settings.what_we_do_desc }}
+          {% else %}
+          End-to-end services to help you adopt and scale artificial intelligence with cutting-edge technology.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for service in services %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="modern-service-card">
+          <div class="border-beam"></div>
+
+          <div class="service-icon-wrapper">
+            <i class="{{ service.icon_class|default:'fas fa-microchip' }}"></i>
+          </div>
+
+          <div class="service-content">
+            <div class="service-badge-row">
+              <span class="service-tag">Enterprise</span>
+              <span class="service-tag">Scalable</span>
+            </div>
+
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-desc">{{ service.short_description }}</p>
+
+            <ul class="card-feature-list">
+              <li><i class="fas fa-check-circle"></i> Real-time Optimization</li>
+              <li><i class="fas fa-check-circle"></i> Custom Agent Workflows</li>
+              <li><i class="fas fa-check-circle"></i> Enterprise Security</li>
+            </ul>
+
+            <a href="{% url 'core:services' %}" class="service-link">
+              Explore Details <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="section text-center">
+<!-- Industries Section -->
+<section class="section-padding py-5 bg-darker overflow-hidden">
   <div class="container">
-    <div class="cta-card p-4 rounded" data-aos="zoom-in">
-      <h3 class="mb-2">Ready to build reliable AI?</h3>
-      <p class="text-muted">Book a consultation and let’s design an AI roadmap that delivers measurable outcomes.</p>
-      <a href="{% url 'core:contact' %}" class="btn btn-gradient btn-lg mt-2">Request a Demo</a>
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="section-subtitle">Sectors</span>
+      <h2 class="section-title">Industries We <span class="text-gradient">Empower</span></h2>
+      <p class="text-muted w-75 mx-auto">Deploying autonomous intelligence across critical global infrastructures.</p>
+    </div>
+
+    <div class="industry-tabs-layout" data-aos="fade-up">
+      <div class="row g-4">
+        <!-- Tab Navigation -->
+        <div class="col-lg-4">
+          <div class="nav flex-column nav-pills industry-nav-pills" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+            {% for industry in industries %}
+            <button class="nav-link {% if forloop.first %}active{% endif %} industry-tab-btn"
+              id="v-pills-{{ industry.id }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ industry.id }}"
+              type="button" role="tab" aria-controls="v-pills-{{ industry.id }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+              <i class="{{ industry.icon_class }} me-3"></i>
+              <span>{{ industry.name }}</span>
+            </button>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="col-lg-8">
+          <div class="tab-content industry-tab-content h-100" id="v-pills-tabContent">
+            {% for industry in industries %}
+            <div class="tab-pane fade {% if forloop.first %}show active{% endif %} h-100" id="v-pills-{{ industry.id }}"
+              role="tabpanel" aria-labelledby="v-pills-{{ industry.id }}-tab">
+              <div
+                class="glass-card-accent industry-display-card h-100 p-5 d-flex flex-column justify-content-center text-center">
+                {% if industry.image %}
+                <div class="industry-display-image mb-4">
+                  <img src="{{ industry.image.url }}" alt="{{ industry.name }}" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                {% endif %}
+                <h3 class="display-6 fw-bold mb-3 text-white">{{ industry.name }}</h3>
+                <p class="lead mb-4 text-light opacity-90">{{ industry.description }}</p>
+                <div class="mt-auto">
+                  <a href="{% url 'core:contact' %}?ref={{ industry.name }}" class="btn btn-glow btn-lg px-5">Explore
+                    Industrial Case Study</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+</section>
+
+<!-- Products Section -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+      <div>
+        <span class="section-subtitle">Innovation</span>
+        <h2 class="section-title">Proprietary <span class="text-gradient">Products</span></h2>
+      </div>
+      <a href="{% url 'core:products' %}" class="btn btn-outline-light rounded-pill d-none d-md-inline-block">View All
+        Products</a>
+    </div>
+
+    <div class="row g-4">
+      {% for product in products %}
+      <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="glass-card p-5 h-100 d-flex flex-column border-gradient">
+          <div class="mb-4">
+            <div
+              class="icon-box-lg bg-dark border border-white border-opacity-10 rounded-3 text-white d-inline-flex align-items-center justify-content-center">
+              <i class="{{ product.icon_class }} fa-2x"></i>
+            </div>
+          </div>
+          <h4 class="h5 fw-bold mb-3">{{ product.name }}</h4>
+          <p class="text-muted flex-grow-1">{{ product.description }}</p>
+          <div class="mt-4">
+            <a href="{% url 'core:products' %}" class="btn btn-link text-white p-0 text-decoration-none">
+              Learn More <i class="fas fa-chevron-right small ms-1 text-primary"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4 d-md-none">
+      <a href="{% url 'core:products' %}" class="btn btn-outline-light rounded-pill">View All Products</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Mouse tracking spotlight effect
+  document.querySelectorAll('.modern-service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+</script>
+
+<!-- Projects Section -->
+<section class="section-padding py-5 position-relative">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
+      <div>
+        <span class="section-subtitle">Our Work</span>
+        <h2 class="section-title">Featured <span class="text-gradient">Projects</span></h2>
+      </div>
+      <a href="{% url 'core:projects' %}" class="btn btn-outline-light rounded-pill d-none d-md-inline-block">View All
+        Projects</a>
+    </div>
+
+    <div class="row g-4">
+      {% for project in projects %}
+      <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="project-card position-relative overflow-hidden rounded-4 h-100">
+          {% if project.thumbnail %}
+          <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}"
+            class="img-fluid w-100 h-100 object-fit-cover">
+          {% else %}
+          <div class="bg-dark h-100 w-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
+            <i class="fas fa-project-diagram fa-3x text-muted"></i>
+          </div>
+          {% endif %}
+          <div class="project-overlay position-absolute bottom-0 start-0 w-100 p-4 glass-nav">
+            <span class="badge bg-primary mb-2">{{ project.category }}</span>
+            <h5 class="mb-1 text-white">{{ project.title }}</h5>
+            <p class="small text-white-50 mb-0">{{ project.short_description|truncatewords:10 }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4 d-md-none">
+      <a href="{% url 'core:projects' %}" class="btn btn-outline-light rounded-pill">View All Projects</a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Courses Section -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="row justify-content-between align-items-end mb-5" data-aos="fade-up">
+      <div class="col-lg-6">
+        <span class="section-subtitle">Level Up</span>
+        <h2 class="section-title">Most Popular <span class="text-gradient">Courses</span></h2>
+        <p class="text-muted">Start your journey today with our most in-demand training programs.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="{% url 'core:trainings' %}" class="btn btn-outline-primary rounded-pill">View All Courses</a>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for training in trainings %}
+      {% if training.is_popular %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="glass-card course-card p-0 overflow-hidden border-0 h-100 d-flex flex-column">
+          <div class="course-image position-relative" style="height: 200px; background: #1a202c;">
+            {% if training.thumbnail %}
+            <img src="{{ training.thumbnail.url }}" alt="{{ training.title }}" class="w-100 h-100 object-fit-cover">
+            {% else %}
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-primary-subtle opacity-60">
+              <i class="fas fa-laptop-code fa-4x"></i>
+            </div>
+            {% endif %}
+            <div class="position-absolute top-0 start-0 p-3">
+              <span class="badge bg-primary">{{ training.level }}</span>
+            </div>
+          </div>
+          <div class="p-4 d-flex flex-column flex-grow-1">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="rating-stars small">
+                <i class="fas fa-star text-warning me-1"></i>
+                <span class="fw-bold">{{ training.rating|default:"4.9" }}</span>
+                <span class="text-muted ms-1">({{ training.students_count|default:"0" }} students)</span>
+              </div>
+            </div>
+
+            <h5 class="mb-4 course-title fw-bold">{{ training.title }}</h5>
+
+            <div class="mt-auto">
+              <div class="course-meta-bar mb-4">
+                <div class="meta-item">
+                  <i class="fas fa-clock"></i>
+                  <span>{{ training.duration }}</span>
+                </div>
+                <div class="meta-divider"></div>
+                <div class="meta-item">
+                  <i class="fas fa-video"></i>
+                  <span>{{ training.mode }}</span>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pt-3 border-top border-light">
+                <div class="course-price-wrapper">
+                  {% if training.discount_price %}
+                  <div class="h4 fw-bold mb-0">${{ training.discount_price }}</div>
+                  <div class="text-muted text-decoration-line-through small">${{ training.price }}</div>
+                  {% else %}
+                  <div class="h4 fw-bold mb-0">${{ training.price }}</div>
+                  {% endif %}
+                </div>
+                <a href="{% url 'core:trainings' %}" class="btn btn-sm btn-glow px-4">
+                  Enroll Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section-padding py-5">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <span class="section-subtitle">Testimonials</span>
+      <h2 class="section-title">Trusted by <span class="text-gradient">Leaders</span></h2>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      {% for testimonial in testimonials %}
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="glass-card p-4 text-center h-100">
+          <div class="mb-4">
+            {% if testimonial.photo %}
+            <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.author }}"
+              class="rounded-circle border border-2 border-primary p-1" width="80" height="80">
+            {% else %}
+            <div
+              class="rounded-circle bg-dark d-inline-flex align-items-center justify-content-center border border-2 border-primary p-1"
+              style="width: 80px; height: 80px;">
+              <span class="fs-3 fw-bold text-primary">{{ testimonial.author|first }}</span>
+            </div>
+            {% endif %}
+          </div>
+          <p class="fst-italic text-muted mb-4">"{{ testimonial.quote }}"</p>
+          <h6 class="mb-1">{{ testimonial.author }}</h6>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 mb-5">
+  <div class="container">
+    <div class="glass-card text-center p-5 rounded-5" data-aos="zoom-in">
+      <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
+      <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;">
+        Let's discuss how our AI solutions can drive growth and efficiency for your organization.
+      </p>
+      <a href="{% url 'core:contact' %}" class="btn btn-glow btn-lg px-5 py-3">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

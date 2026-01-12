@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ job.title }} - Careers - {{ site_settings.site_name }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-standard">
+    <div class="page-header-glow"></div>
+    <div class="container position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-8" data-aos="fade-right">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:careers' %}"
+                                class="text-primary-subtle">Careers</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Position Detail</li>
+                    </ol>
+                </nav>
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    {% if job.remote %}
+                    <span class="badge bg-primary px-3 py-2 rounded-pill">Remote</span>
+                    {% endif %}
+                    {% if job.location %}
+                    <span class="badge bg-secondary px-3 py-2 rounded-pill">{{ job.location }}</span>
+                    {% endif %}
+                </div>
+                <h1 class="display-4 fw-bold mb-4">{{ job.title }}</h1>
+                <p class="lead text-light opacity-75 mb-0">
+                    <i class="far fa-calendar-alt me-2 text-primary"></i> Posted on {{ job.posted_at|date:'M j, Y' }}
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
+                <a href="#apply-form" class="btn btn-glow px-5 py-3 rounded-pill fw-bold">Apply Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Job Content -->
+<section class="section-padding py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7" data-aos="fade-up">
+                <div class="glass-card mb-4 border-opacity-10 p-5">
+                    <h3 class="fw-bold mb-4 text-white">Role <span class="text-gradient">Description</span></h3>
+                    <div class="text-light job-description">
+                        {{ job.description|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5" id="apply-form" data-aos="fade-left">
+                <div class="glass-card p-5 rounded-5 border-gradient position-sticky" style="top: 120px;">
+                    <h3 class="h4 mb-4 fw-bold">Apply for this Position</h3>
+
+                    {% if applied %}
+                    <div class="alert alert-success border-0 bg-success-subtle text-success mb-4 rounded-4">
+                        <i class="fas fa-check-circle me-2"></i> Application received. We will contact you shortly.
+                    </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" class="needs-validation">
+                        {% csrf_token %}
+                        <!-- Hidden field to enforce this job -->
+                        <input type="hidden" name="{{ form.job.name }}" value="{{ job.id }}">
+
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}"
+                                        class="form-control" placeholder="Name" required>
+                                    <label for="{{ form.name.id_for_label }}">Full Name</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+                                        class="form-control" placeholder="Email" required>
+                                    <label for="{{ form.email.id_for_label }}">Email Address</label>
+                                </div>
+                            </div>
+                            <!-- Job field is hidden/omitted from display, assuming the view handles it or we force it -->
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea name="{{ form.cover_message.name }}"
+                                        id="{{ form.cover_message.id_for_label }}" class="form-control"
+                                        placeholder="Message" style="height: 120px"></textarea>
+                                    <label for="{{ form.cover_message.id_for_label }}">Cover Letter / Pitch</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small mb-2 text-muted">Upload CV/Resume</label>
+                                <input type="file" name="{{ form.cv.name }}" id="{{ form.cv.id_for_label }}"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-12 pt-2">
+                                <button type="submit" class="btn btn-glow w-100 py-3">Submit Application <i
+                                        class="fas fa-paper-plane ms-2 small"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .job-description {
+        opacity: 0.9;
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+</style>
+{% endblock %}
