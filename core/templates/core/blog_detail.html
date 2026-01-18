@@ -14,9 +14,9 @@
         <article data-aos="fade-up" class="blog-detail-content">
           <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'core:blog' %}"
-                  class="text-primary text-decoration-none">Intelligence Feed</a></li>
-              <li class="breadcrumb-item active text-muted" aria-current="page">{{ post.category|default:"Research" }}
+              <!-- <li class="breadcrumb-item"><a href="{% url 'core:blog' %}"
+                  class="text-black text-decoration-none">Intelligence Feed</a></li> -->
+              <!-- <li class="breadcrumb-item active text-black" aria-current="page">{{ post.category|default:"Research" }} -->
               </li>
             </ol>
           </nav>
@@ -54,9 +54,12 @@
               <div class="share-box">
                 <span class="text-muted d-block mb-2 small text-uppercase letter-spacing-1">Share Intelligence</span>
                 <div class="d-flex gap-2">
-                  <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                  <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                  <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                  <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ post.title|urlencode }}"
+                    class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri|urlencode }}"
+                    class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
+                    class="social-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
                 </div>
               </div>
               <a href="{% url 'core:blog' %}" class="btn btn-lg btn-glow px-5 rounded-pill">

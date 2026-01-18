@@ -14,6 +14,23 @@ class SiteSettings(models.Model):
     what_we_do_title = models.CharField(max_length=250, default='Comprehensive AI <span class="text-gradient">Solutions</span>')
     what_we_do_desc = models.TextField(default='End-to-end services to help you adopt and scale artificial intelligence with cutting-edge technology.')
 
+    ind_subtitle = models.CharField(max_length=100, default='Sectors')
+    ind_title = models.CharField(max_length=250, default='Industries We <span class="text-gradient">Empower</span>')
+    ind_desc = models.TextField(default='Deploying autonomous intelligence across critical global infrastructures.')
+
+    prod_subtitle = models.CharField(max_length=100, default='Innovation')
+    prod_title = models.CharField(max_length=250, default='Proprietary <span class="text-gradient">Products</span>')
+
+    proj_subtitle = models.CharField(max_length=100, default='Our Work')
+    proj_title = models.CharField(max_length=250, default='Featured <span class="text-gradient">Projects</span>')
+
+    course_subtitle = models.CharField(max_length=100, default='Level Up')
+    course_title = models.CharField(max_length=250, default='Most Popular <span class="text-gradient">Courses</span>')
+    course_desc = models.TextField(default='Start your journey today with our most in-demand training programs.')
+
+    test_subtitle = models.CharField(max_length=100, default='Testimonials')
+    test_title = models.CharField(max_length=250, default='Trusted by <span class="text-gradient">Leaders</span>')
+
     footer_text = models.TextField(default="We build dependable AI systems — research, productization, and production operations.", blank=True)
     
     # Social Media Links
@@ -42,7 +59,13 @@ class Service(models.Model):
     title = models.CharField(max_length=200)
     short_description = models.TextField()
     icon_class = models.CharField(max_length=80, blank=True)
+    features = models.TextField(default='Advanced Neural Networks\nVector DB Integration\nCompliance-first Design', help_text="Enter one feature per line")
     order = models.PositiveIntegerField(default=0)
+    
+    @property
+    def features_list(self):
+        return [f.strip() for f in self.features.split('\n') if f.strip()]
+
     def __str__(self): return self.title
 
 class CoreValue(models.Model):

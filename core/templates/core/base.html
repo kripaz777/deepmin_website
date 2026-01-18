@@ -32,11 +32,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/clean_theme.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   {% block extra_head %}{% endblock %}
 </head>
 
-<body class="theme-dark">
+<body class="theme-clean">
 
   <!-- Background Elements -->
   <div id="canvas-container" class="position-fixed top-0 start-0 w-100 h-100" style="z-index: -1;"></div>
@@ -175,12 +176,7 @@
   <!-- Back to top -->
   <button id="backToTop" class="back-to-top" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-  <!-- Theme Toggle -->
-  <button id="themeToggle" class="btn btn-theme-toggle position-fixed bottom-0 start-0 m-4 shadow-lg"
-    style="z-index: 1000; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);"
-    title="Toggle Clean Mode">
-    <i class="fas fa-magic me-2"></i> <span id="themeToggleText">Clean Mode</span>
-  </button>
+
 
   <!-- Chat widget -->
   {% include 'chatbot/chatbot_widget.html' %}
@@ -194,6 +190,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script src="{% static 'core/js/three_bg.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
@@ -217,38 +214,7 @@
       easing: 'ease-out-cubic'
     });
 
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('themeToggle');
-    const themeToggleText = document.getElementById('themeToggleText');
-    const body = document.body;
 
-    function updateThemeUI() {
-      if (body.classList.contains('theme-clean')) {
-        themeToggleText.textContent = 'Dark Mode';
-        themeToggle.classList.remove('btn-dark');
-        themeToggle.classList.add('btn-light');
-      } else {
-        themeToggleText.textContent = 'Clean Mode';
-        themeToggle.classList.remove('btn-light');
-        themeToggle.classList.add('btn-dark');
-      }
-    }
-
-    // Check local storage
-    if (localStorage.getItem('theme') === 'clean') {
-      body.classList.add('theme-clean');
-      updateThemeUI();
-    }
-
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('theme-clean');
-      updateThemeUI();
-      if (body.classList.contains('theme-clean')) {
-        localStorage.setItem('theme', 'clean');
-      } else {
-        localStorage.setItem('theme', 'default');
-      }
-    });
   </script>
   {% block extra_js %}{% endblock %}
 </body>

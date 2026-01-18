@@ -14,6 +14,21 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('What We Do Section', {
             'fields': ('what_we_do_subtitle', 'what_we_do_title', 'what_we_do_desc')
         }),
+        ('Industries Section', {
+            'fields': ('ind_subtitle', 'ind_title', 'ind_desc')
+        }),
+        ('Products Section', {
+            'fields': ('prod_subtitle', 'prod_title')
+        }),
+        ('Projects Section', {
+            'fields': ('proj_subtitle', 'proj_title')
+        }),
+        ('Courses Section', {
+            'fields': ('course_subtitle', 'course_title', 'course_desc')
+        }),
+        ('Testimonials Section', {
+            'fields': ('test_subtitle', 'test_title')
+        }),
         ('Footer Section', {
             'fields': ('footer_text', 'facebook_url', 'twitter_url', 'linkedin_url', 'instagram_url', 'youtube_url', 'github_url')
         }),

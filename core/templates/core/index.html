@@ -4,80 +4,50 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section class="hero-section d-flex align-items-center position-relative overflow-hidden">
-  <!-- Subtle particle background for hero -->
-  <div class="hero-particles">
-    <div class="particle p1"></div>
-    <div class="particle p2"></div>
-    <div class="particle p3"></div>
-  </div>
+<section class="hero-section position-relative">
+  <!-- Atmospheric Nebula Glows -->
+  <div class="nebula-glow nebula-1"></div>
+  <div class="nebula-glow nebula-2"></div>
 
   <div class="container position-relative z-2">
     <div class="row align-items-center">
       <div class="col-lg-6" data-aos="fade-up">
-        <div class="hero-content-reveal">
-          <span class="badge rounded-pill bg-primary-subtle text-primary border border-primary mb-3 px-3 py-2">
-            <i class="fas fa-microchip me-2"></i> Leading the Agentic Revolution
-          </span>
-          <h1 class="display-3 fw-bolder mb-4 lh-tight tracking-tight">
+        <div class="hero-content">
+          <h1 class="hero-main-h1">
             {% if site_settings.hero_title %}
             {{ site_settings.hero_title|safe }}
             {% else %}
-            Next-Gen <span class='text-gradient'>AI Agents</span> & Autonomous Systems
+            Architecting the <span class="text-gradient">Future</span> of Intelligence
             {% endif %}
           </h1>
-          <p class="lead mb-5 text-light opacity-75 fs-5" style="max-width: 600px;">
+          <p class="hero-sub-text">
             {% if site_settings.hero_subtitle %}
             {{ site_settings.hero_subtitle }}
             {% else %}
-            We architect intelligent ecosystems that think, learn, and execute. From agentic workflows to enterprise
-            LLMs,
-            we build the future of autonomy with unrivaled precision.
+            We build autonomous agentic ecosystems that redefine enterprise efficiency. Experience the next generation
+            of AI integration.
             {% endif %}
           </p>
-          <div class="d-flex gap-3 btn-group-hero mb-5">
+          <div class="d-flex flex-wrap gap-4">
             <a href="{% url 'core:trainings' %}" class="btn btn-glow btn-lg px-5 py-3 rounded-pill fw-bold">
-              Explore Academy <i class="fas fa-rocket ms-2"></i>
+              Explore Academy
             </a>
-            <a href="{% url 'core:contact' %}"
-              class="btn btn-glass-premium btn-lg px-5 py-3 rounded-pill fw-bold hover-lift">
-              Consultation <i class="fas fa-arrow-right ms-2"></i>
+            <a href="{% url 'core:contact' %}" class="btn btn-glass-premium btn-lg px-5 py-3 rounded-pill fw-bold">
+              Consultation
             </a>
-          </div>
-
-          <!-- Trust Indicators -->
-          <div class="hero-trust-bar" data-aos="fade-up" data-aos-delay="800">
-            <span class="small text-muted text-uppercase fw-bold tracking-widest mb-3 d-block">Trusted Engineering
-              Partner</span>
-            <div class="d-flex gap-4 opacity-50 filter-grayscale client-logos">
-              <i class="fab fa-google fa-lg"></i>
-              <i class="fab fa-aws fa-lg"></i>
-              <i class="fab fa-microsoft fa-lg"></i>
-              <i class="fab fa-nvidia fa-lg"></i>
-            </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
-        <div class="position-relative hero-visual-container">
-          <!-- Premium Visual Stack -->
-          <div class="hero-image-stack position-relative">
-            <!-- Cinematic Glow Aura -->
-            <div class="hero-image-aura"></div>
 
-              <!-- Technical Scanning Beam -->
-
-              <img src="{% static 'core/img/assets/hero-vector-removebg-preview.png' %}"
-                alt="AI Development Platform" 
-                style=" width: 100%; object-fit: contain;">
-
-
-          </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="hero-asset-wrapper" data-aos="fade-zoom-in" data-aos-delay="400">
+          <div class="hero-asset-glow"></div>
+          <img src="{% static 'core/img/assets/hero-vector-removebg-preview.png' %}" alt="DeepMinds AI"
+            class="img-fluid position-relative z-1">
         </div>
       </div>
     </div>
   </div>
-
   <!-- Animated Scroll Guide -->
   <div class="scroll-guide d-none d-lg-flex" data-aos="fade-up" data-aos-delay="1000">
     <div class="mouse-icon"></div>
@@ -100,7 +70,7 @@
           {% if site_settings.what_we_do_title %}
           {{ site_settings.what_we_do_title|safe }}
           {% else %}
-          Comprehensive AI <span class='text-gradient'>Solutions</span>
+          Comprehensive AI <span class="text-gradient">Solutions</span>
           {% endif %}
         </h2>
         <p class="text-muted">
@@ -133,9 +103,9 @@
             <p class="service-desc">{{ service.short_description }}</p>
 
             <ul class="card-feature-list">
-              <li><i class="fas fa-check-circle"></i> Real-time Optimization</li>
-              <li><i class="fas fa-check-circle"></i> Custom Agent Workflows</li>
-              <li><i class="fas fa-check-circle"></i> Enterprise Security</li>
+              {% for feature in service.features_list %}
+              <li><i class="fas fa-check-circle"></i> {{ feature }}</li>
+              {% endfor %}
             </ul>
 
             <a href="{% url 'core:services' %}" class="service-link">
@@ -153,9 +123,27 @@
 <section class="section-padding py-5 bg-darker overflow-hidden">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <span class="section-subtitle">Sectors</span>
-      <h2 class="section-title">Industries We <span class="text-gradient">Empower</span></h2>
-      <p class="text-muted w-75 mx-auto">Deploying autonomous intelligence across critical global infrastructures.</p>
+      <span class="section-subtitle">
+        {% if site_settings.ind_subtitle %}
+        {{ site_settings.ind_subtitle }}
+        {% else %}
+        Sectors
+        {% endif %}
+      </span>
+      <h2 class="section-title">
+        {% if site_settings.ind_title %}
+        {{ site_settings.ind_title|safe }}
+        {% else %}
+        Industries We <span class="text-gradient">Empower</span>
+        {% endif %}
+      </h2>
+      <p class="text-muted w-75 mx-auto">
+        {% if site_settings.ind_desc %}
+        {{ site_settings.ind_desc }}
+        {% else %}
+        Deploying autonomous intelligence across critical global infrastructures.
+        {% endif %}
+      </p>
     </div>
 
     <div class="industry-tabs-layout" data-aos="fade-up">
@@ -204,15 +192,26 @@
     </div>
   </div>
 </section>
-</section>
 
 <!-- Products Section -->
 <section class="section-padding py-5">
   <div class="container">
     <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
       <div>
-        <span class="section-subtitle">Innovation</span>
-        <h2 class="section-title">Proprietary <span class="text-gradient">Products</span></h2>
+        <span class="section-subtitle">
+          {% if site_settings.prod_subtitle %}
+          {{ site_settings.prod_subtitle }}
+          {% else %}
+          Innovation
+          {% endif %}
+        </span>
+        <h2 class="section-title">
+          {% if site_settings.prod_title %}
+          {{ site_settings.prod_title|safe }}
+          {% else %}
+          Proprietary <span class="text-gradient">Products</span>
+          {% endif %}
+        </h2>
       </div>
       <a href="{% url 'core:products' %}" class="btn btn-outline-light rounded-pill d-none d-md-inline-block">View All
         Products</a>
@@ -264,8 +263,20 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
       <div>
-        <span class="section-subtitle">Our Work</span>
-        <h2 class="section-title">Featured <span class="text-gradient">Projects</span></h2>
+        <span class="section-subtitle">
+          {% if site_settings.proj_subtitle %}
+          {{ site_settings.proj_subtitle }}
+          {% else %}
+          Our Work
+          {% endif %}
+        </span>
+        <h2 class="section-title">
+          {% if site_settings.proj_title %}
+          {{ site_settings.proj_title|safe }}
+          {% else %}
+          Featured <span class="text-gradient">Projects</span>
+          {% endif %}
+        </h2>
       </div>
       <a href="{% url 'core:projects' %}" class="btn btn-outline-light rounded-pill d-none d-md-inline-block">View All
         Projects</a>
@@ -304,9 +315,27 @@
   <div class="container">
     <div class="row justify-content-between align-items-end mb-5" data-aos="fade-up">
       <div class="col-lg-6">
-        <span class="section-subtitle">Level Up</span>
-        <h2 class="section-title">Most Popular <span class="text-gradient">Courses</span></h2>
-        <p class="text-muted">Start your journey today with our most in-demand training programs.</p>
+        <span class="section-subtitle">
+          {% if site_settings.course_subtitle %}
+          {{ site_settings.course_subtitle }}
+          {% else %}
+          Level Up
+          {% endif %}
+        </span>
+        <h2 class="section-title">
+          {% if site_settings.course_title %}
+          {{ site_settings.course_title|safe }}
+          {% else %}
+          Most Popular <span class="text-gradient">Courses</span>
+          {% endif %}
+        </h2>
+        <p class="text-muted">
+          {% if site_settings.course_desc %}
+          {{ site_settings.course_desc }}
+          {% else %}
+          Start your journey today with our most in-demand training programs.
+          {% endif %}
+        </p>
       </div>
       <div class="col-lg-4 text-lg-end">
         <a href="{% url 'core:trainings' %}" class="btn btn-outline-primary rounded-pill">View All Courses</a>
@@ -381,32 +410,60 @@
 <section class="section-padding py-5">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <span class="section-subtitle">Testimonials</span>
-      <h2 class="section-title">Trusted by <span class="text-gradient">Leaders</span></h2>
+      <span class="section-subtitle">
+        {% if site_settings.test_subtitle %}
+        {{ site_settings.test_subtitle }}
+        {% else %}
+        Testimonials
+        {% endif %}
+      </span>
+      <h2 class="section-title">
+        {% if site_settings.test_title %}
+        {{ site_settings.test_title|safe }}
+        {% else %}
+        Trusted by <span class="text-gradient">Leaders</span>
+        {% endif %}
+      </h2>
     </div>
 
-    <div class="row g-4 justify-content-center">
-      {% for testimonial in testimonials %}
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
-        <div class="glass-card p-4 text-center h-100">
-          <div class="mb-4">
-            {% if testimonial.photo %}
-            <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.author }}"
-              class="rounded-circle border border-2 border-primary p-1" width="80" height="80">
-            {% else %}
-            <div
-              class="rounded-circle bg-dark d-inline-flex align-items-center justify-content-center border border-2 border-primary p-1"
-              style="width: 80px; height: 80px;">
-              <span class="fs-3 fw-bold text-primary">{{ testimonial.author|first }}</span>
+    <div class="row justify-content-center">
+      <div class="col-12" data-aos="fade-up">
+        <!-- Swiper -->
+        <div class="swiper testimonial-swiper pb-5">
+          <div class="swiper-wrapper">
+            {% for testimonial in testimonials %}
+            <div class="swiper-slide">
+              <div class="glass-card p-4 text-center h-100">
+                <div class="mb-4">
+                  {% if testimonial.photo %}
+                  <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.author }}"
+                    class="rounded-circle border border-2 border-primary p-1" width="100" height="100"
+                    style="object-fit: cover;">
+                  {% else %}
+                  <div
+                    class="rounded-circle bg-dark d-inline-flex align-items-center justify-content-center border border-2 border-primary p-1"
+                    style="width: 100px; height: 100px;">
+                    <span class="fs-1 fw-bold text-primary">{{ testimonial.author|first }}</span>
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="mb-3">
+                  <i class="fas fa-quote-left text-primary opacity-30 fs-1"></i>
+                </div>
+                <p class="fs-5 fst-italic text-light opacity-90 mb-4 px-lg-4">"{{ testimonial.quote }}"</p>
+                <h5 class="mb-1 fw-bold">{{ testimonial.author }}</h5>
+                <p class="text-primary small text-uppercase tracking-widest mb-0">{{ testimonial.role }}</p>
+              </div>
             </div>
-            {% endif %}
+            {% endfor %}
           </div>
-          <p class="fst-italic text-muted mb-4">"{{ testimonial.quote }}"</p>
-          <h6 class="mb-1">{{ testimonial.author }}</h6>
-
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Navigation -->
+          <div class="swiper-button-next d-none d-md-flex"></div>
+          <div class="swiper-button-prev d-none d-md-flex"></div>
         </div>
       </div>
-      {% endfor %}
     </div>
   </div>
 </section>
@@ -423,5 +480,36 @@
     </div>
   </div>
 </section>
+
+
+
+<script>
+  // Initialize Testimonial Swiper
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.testimonial-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      centeredSlides: false,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        992: {
+          slidesPerView: 2,
+        }
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    });
+  });
+</script>
 
 {% endblock %}

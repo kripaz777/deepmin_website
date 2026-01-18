@@ -6,30 +6,33 @@
 */
 
 :root {
-    /* Restored Signature AI Lab Palette (Violet/Pink) */
-    --ct-primary: #7c3aed;
-    /* Deep Vibrant Violet */
-    --ct-primary-light: #ec4899;
-    /* Saturated Pink */
-    --ct-accent: #d946ef;
-    /* Magenta Accent */
+    /* Hippie Blue Theme Palette */
+    --ct-primary: #4CA1AF;
+    /* Hippie Blue */
+    --ct-primary-light: #67B8C4;
+    /* Light Hippie Blue */
+    --ct-accent: #3B8894;
+    /* Darker Hippie Blue */
     --ct-info: #0ea5e9;
     --ct-success: #10b981;
     --ct-warning: #f59e0b;
-    --ct-dark: #2e1065;
-    /* Deep Indigo-Violet */
-    --ct-darker: #1e1b4b;
+    --ct-dark: #2C5E66;
+    /* Deep Hippie Blue */
+    --ct-darker: #1A3A3F;
+    /* Darker Deep Hippie Blue */
     --ct-light: #fdfcff;
     --ct-white: #ffffff;
-    --ct-muted: #6d28d9;
-    --ct-gray-100: #f8f6ff;
-    /* Ultra-clean Lavender */
-    --ct-gray-200: #f0ebff;
+    --ct-muted: #5E9FA8;
+    /* Muted Hippie Blue */
+    --ct-gray-100: #f0f7f8;
+    /* Ultra-clean Light Blue-Gray */
+    --ct-gray-200: #e1eef0;
+    /* Light Blue-Gray */
 
     /* Refined Radius & Layered Crystalline Shadows */
-    --ct-shadow: 0 4px 6px -1px rgb(124 58 237 / 0.08), 0 2px 4px -2px rgb(124 58 237 / 0.04);
-    --ct-shadow-lg: 0 20px 25px -5px rgb(124 58 237 / 0.1), 0 8px 10px -6px rgb(124 58 237 / 0.05);
-    --ct-shadow-premium: 0 0 0 1px rgba(124, 58, 237, 0.05), 0 10px 30px -5px rgba(124, 58, 237, 0.1), 0 20px 50px -10px rgba(124, 58, 237, 0.1);
+    --ct-shadow: 0 4px 6px -1px rgb(76 161 175 / 0.08), 0 2px 4px -2px rgb(76 161 175 / 0.04);
+    --ct-shadow-lg: 0 20px 25px -5px rgb(76 161 175 / 0.1), 0 8px 10px -6px rgb(76 161 175 / 0.05);
+    --ct-shadow-premium: 0 0 0 1px rgba(76, 161, 175, 0.05), 0 10px 30px -5px rgba(76, 161, 175, 0.1), 0 20px 50px -10px rgba(76, 161, 175, 0.1);
 
     --ct-transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --ct-radius-xl: 24px;
@@ -39,8 +42,8 @@
 body.theme-clean {
     background-color: var(--ct-gray-100) !important;
     background-image:
-        radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.05) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.05) 0px, transparent 50%) !important;
+        radial-gradient(at 0% 0%, rgba(76, 161, 175, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(103, 184, 196, 0.05) 0px, transparent 50%) !important;
     color: var(--ct-dark) !important;
     font-family: 'Outfit', sans-serif !important;
     line-height: 1.6;
@@ -84,13 +87,15 @@ body.theme-clean .bg-dark {
 body.theme-clean .glass-nav {
     background: rgba(255, 255, 255, 0.9) !important;
     backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(124, 58, 237, 0.05) !important;
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.04) !important;
+    border-bottom: 1px solid rgba(76, 161, 175, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(76, 161, 175, 0.04) !important;
     padding: 1.2rem 0 !important;
 }
 
 body.theme-clean .navbar-brand .brand-name {
-    color: var(--ct-dark) !important;
+    color: var(--ct-primary) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
     font-weight: 800 !important;
     letter-spacing: -0.05em;
     font-size: 1.6rem !important;
@@ -113,7 +118,7 @@ body.theme-clean .nav-link.active {
 body.theme-clean .glass-nav.scrolled {
     background: rgba(255, 255, 255, 0.98) !important;
     padding: 0.8rem 0 !important;
-    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(76, 161, 175, 0.08) !important;
 }
 
 /* Navbar Contact Button Spec */
@@ -123,7 +128,7 @@ body.theme-clean .navbar-nav .nav-item .btn-glow.nav-link {
     border-radius: 50px !important;
     padding: 0.5rem 1.3rem !important;
     margin-left: 0.4rem;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(76, 161, 175, 0.2) !important;
     border: none !important;
     display: flex;
     align-items: center;
@@ -134,7 +139,7 @@ body.theme-clean .navbar-nav .nav-item .btn-glow.nav-link:hover {
     background: var(--ct-dark) !important;
     color: white !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(76, 161, 175, 0.3) !important;
 }
 
 body.theme-clean .navbar-toggler {
@@ -282,7 +287,7 @@ body.theme-clean .btn-primary {
     padding: 1rem 2.8rem !important;
     font-weight: 600 !important;
     letter-spacing: -0.01em !important;
-    box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3) !important;
+    box-shadow: 0 10px 25px -5px rgba(76, 161, 175, 0.3) !important;
     border: none !important;
 }
 
@@ -347,26 +352,34 @@ body.theme-clean .form-control {
 
 body.theme-clean .form-control:focus {
     border-color: var(--ct-primary) !important;
-    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1) !important;
+    box-shadow: 0 0 0 4px rgba(76, 161, 175, 0.1) !important;
 }
 
 /* Breadcrumbs Premium */
 body.theme-clean .breadcrumb {
-    background: white !important;
-    border: 1px solid var(--ct-gray-200) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
     box-shadow: var(--ct-shadow) !important;
     padding: 0.8rem 2rem !important;
     border-radius: 50px !important;
 }
 
+body.theme-clean .breadcrumb-item.active {
+    color: white !important;
+}
+
 body.theme-clean .breadcrumb-item a {
-    color: var(--ct-primary) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
     font-weight: 700 !important;
 }
 
-body.theme-clean .breadcrumb-item.active {
-    color: var(--ct-dark) !important;
-    font-weight: 900 !important;
+body.theme-clean .breadcrumb-item a:hover {
+    color: white !important;
+}
+
+body.theme-clean .breadcrumb-item+.breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* Force Global Legibility */
@@ -374,7 +387,7 @@ body.theme-clean p,
 body.theme-clean li,
 body.theme-clean span:not(.badge),
 body.theme-clean .section-title,
-body.theme-clean h1,
+body.theme-clean h1:not(.hero-section h1):not(.hero-compact h1):not(.hero-standard h1),
 body.theme-clean h2,
 body.theme-clean h3,
 body.theme-clean h4,
@@ -386,6 +399,19 @@ body.theme-clean .lead,
 body.theme-clean .job-description,
 body.theme-clean .job-description * {
     color: var(--ct-dark) !important;
+}
+
+/* Specific White Overrides for Hero & Breadcrumb Content */
+body.theme-clean .hero-section h1,
+body.theme-clean .hero-compact h1,
+body.theme-clean .hero-standard h1,
+body.theme-clean .hero-section .lead,
+body.theme-clean .hero-compact .lead,
+body.theme-clean .hero-standard .lead,
+body.theme-clean .hero-section .breadcrumb-item,
+body.theme-clean .hero-compact .breadcrumb-item,
+body.theme-clean .hero-standard .breadcrumb-item {
+    color: white !important;
 }
 
 /* Footer Clean */
@@ -524,7 +550,7 @@ body.theme-clean .btn-syllabus:hover {
     color: white !important;
     border-color: transparent !important;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2) !important;
+    box-shadow: 0 5px 15px rgba(76, 161, 175, 0.2) !important;
 }
 
 body.theme-clean .course-price-wrapper .h3,
@@ -622,13 +648,13 @@ body.theme-clean .c-comment {
 /* --- Clean Mode Methodology Premium Polish --- */
 
 body.theme-clean .build-methodology-section {
-    background: radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.02) 0%, transparent 40%) !important;
+    background: radial-gradient(circle at 0% 0%, rgba(76, 161, 175, 0.02) 0%, transparent 40%) !important;
 }
 
 body.theme-clean .premium-step-card {
     background: rgba(255, 255, 255, 0.4) !important;
     backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(124, 58, 237, 0.05) !important;
+    border: 1px solid rgba(76, 161, 175, 0.05) !important;
     border-radius: 20px !important;
     padding: 1.5rem 1.5rem 1.5rem 3.5rem !important;
     margin-bottom: 2rem !important;
@@ -739,12 +765,12 @@ body.theme-clean .btn-glow {
     background: linear-gradient(135deg, var(--ct-primary) 0%, #ec4899 100%) !important;
     color: white !important;
     border: none !important;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25) !important;
+    box-shadow: 0 4px 15px rgba(76, 161, 175, 0.25) !important;
 }
 
 body.theme-clean .btn-glow:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4) !important;
+    box-shadow: 0 8px 25px rgba(76, 161, 175, 0.4) !important;
     filter: brightness(1.1);
 }
 
